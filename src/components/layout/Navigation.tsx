@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X, Music, Calendar, Play, FileText, User, MessageCircle, Link2, BookOpen, Camera, Mic } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ThemeToggle } from '@/components/ui/theme-toggle'
 
 const navigationItems = [
   { name: 'Home', href: '/', icon: Music },
@@ -25,13 +26,13 @@ export default function Navigation() {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
+    <nav className="sticky top-0 z-50 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2">
             <Music className="h-8 w-8 text-amber-600" />
-            <span className="font-bold text-xl text-gray-900">
+            <span className="font-bold text-xl text-gray-900 dark:text-white">
               Kinloch Nelson
             </span>
           </Link>
@@ -44,7 +45,7 @@ export default function Navigation() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="flex items-center space-x-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50 transition-colors"
+                  className="flex items-center space-x-1 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors"
                 >
                   <Icon className="h-4 w-4" />
                   <span>{item.name}</span>
@@ -56,7 +57,7 @@ export default function Navigation() {
             <div className="relative group">
               <Button
                 variant="ghost"
-                className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-amber-600"
+                className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600"
               >
                 <span>More</span>
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -64,7 +65,7 @@ export default function Navigation() {
                 </svg>
               </Button>
               
-              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
+              <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 dark:ring-gray-700 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                 <div className="py-1">
                   {navigationItems.slice(6).map((item) => {
                     const Icon = item.icon
@@ -72,7 +73,7 @@ export default function Navigation() {
                       <Link
                         key={item.name}
                         href={item.href}
-                        className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-amber-50 hover:text-amber-600"
+                        className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-amber-50 dark:hover:bg-amber-900/20 hover:text-amber-600"
                       >
                         <Icon className="h-4 w-4" />
                         <span>{item.name}</span>
@@ -82,10 +83,16 @@ export default function Navigation() {
                 </div>
               </div>
             </div>
+            
+            {/* Theme Toggle */}
+            <div className="ml-4">
+              <ThemeToggle />
+            </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="lg:hidden">
+          <div className="lg:hidden flex items-center space-x-2">
+            <ThemeToggle />
             <Button
               variant="ghost"
               size="icon"
@@ -100,14 +107,14 @@ export default function Navigation() {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="lg:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700">
               {navigationItems.map((item) => {
                 const Icon = item.icon
                 return (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="flex items-center space-x-3 px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-amber-600 hover:bg-amber-50 transition-colors"
+                    className="flex items-center space-x-3 px-3 py-2 rounded-lg text-base font-medium text-gray-700 dark:text-gray-300 hover:text-amber-600 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors"
                     onClick={() => setIsOpen(false)}
                   >
                     <Icon className="h-5 w-5" />

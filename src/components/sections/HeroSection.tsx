@@ -4,15 +4,49 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Play, Calendar, Music, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { DebugTheme } from '@/components/DebugTheme'
 
-export default function HeroSection() {
+interface Biography {
+  _id: string
+  name: string
+  tagline: string
+  location: string
+  shortBio: string
+}
+
+interface SiteSettings {
+  _id: string
+  title: string
+  description: string
+  donationLink: string
+}
+
+interface HeroSectionProps {
+  biography: Biography
+  siteSettings: SiteSettings
+}
+
+export default function HeroSection({ biography, siteSettings }: HeroSectionProps) {
+  if (!biography || !siteSettings) {
+    return (
+      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
+        <div className="text-center text-gray-600">
+          <p>Unable to load content</p>
+        </div>
+      </section>
+    )
+  }
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
+      
+      <DebugTheme />
+      
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-4 -right-4 w-72 h-72 bg-amber-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
-        <div className="absolute -bottom-8 -left-4 w-72 h-72 bg-orange-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-red-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-2000"></div>
+        <div className="absolute -top-4 -right-4 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
+        <div className="absolute -bottom-8 -left-4 w-72 h-72 bg-accent/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-primary/15 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse delay-2000"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,16 +65,16 @@ export default function HeroSection() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="mb-6"
             >
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 mb-4">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4">
                 <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-                  Kinloch
+                  {biography.name.split(' ')[0]}
                 </span>
                 <br />
-                <span className="text-gray-800">Nelson</span>
+                <span className="text-gray-800 dark:text-gray-200">{biography.name.split(' ')[1]}</span>
               </h1>
-              <div className="flex items-center justify-center lg:justify-start space-x-2 text-gray-600">
+              <div className="flex items-center justify-center lg:justify-start space-x-2 text-gray-600 dark:text-gray-400">
                 <Music className="h-5 w-5" />
-                <span className="text-lg font-medium">Fingerstyle Guitar • Rochester, NY</span>
+                <span className="text-lg font-medium">{biography.tagline} • {biography.location}</span>
               </div>
             </motion.div>
 
@@ -49,10 +83,9 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl text-gray-700 mb-8 leading-relaxed"
+              className="text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed"
             >
-              Virtuosic fingerstyle guitarist blending classical technique with jazz sensibilities, 
-              creating captivating arrangements that journey through American roots, blues, and contemporary music.
+              {biography.shortBio}
             </motion.p>
 
             {/* Call-to-action buttons */}
@@ -60,33 +93,39 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+              className="space-y-4"
             >
-              <Button asChild size="lg" className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700">
-                <Link href="/videos" className="flex items-center space-x-2">
-                  <Play className="h-5 w-5" />
-                  <span>Watch Performances</span>
-                </Link>
-              </Button>
-              
-              <Button asChild variant="outline" size="lg">
-                <Link href="/performances" className="flex items-center space-x-2">
-                  <Calendar className="h-5 w-5" />
-                  <span>Upcoming Shows</span>
-                </Link>
-              </Button>
+              {/* Primary CTAs */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <Button asChild size="lg" className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700">
+                  <Link href="/videos" className="flex items-center space-x-2">
+                    <Play className="h-5 w-5" />
+                    <span>Watch Performances</span>
+                  </Link>
+                </Button>
+                
+                <Button asChild variant="outline" size="lg">
+                  <Link href="/performances" className="flex items-center space-x-2">
+                    <Calendar className="h-5 w-5" />
+                    <span>Upcoming Shows</span>
+                  </Link>
+                </Button>
+              </div>
 
-              <Button asChild variant="ghost" size="lg" className="bg-green-600 text-white hover:bg-green-700">
-                <a 
-                  href="https://streamlabs.com/kinlochnelson" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex items-center space-x-2"
-                >
-                  <ExternalLink className="h-5 w-5" />
-                  <span>Live Stream Concert Donations</span>
-                </a>
-              </Button>
+              {/* Donation link */}
+              {siteSettings.donationLink && (
+                <div className="text-center lg:text-left">
+                  <a 
+                    href={siteSettings.donationLink} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-2 text-sm text-green-600 hover:text-green-700 font-medium transition-colors"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    <span>Support live stream concerts</span>
+                  </a>
+                </div>
+              )}
             </motion.div>
           </motion.div>
 
@@ -120,17 +159,17 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Featured quote */}
+        {/* Featured quote - could be made dynamic by fetching featured testimonial */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.8, duration: 0.6 }}
           className="mt-16 text-center"
         >
-          <blockquote className="text-lg italic text-gray-600 max-w-3xl mx-auto">
+          <blockquote className="text-lg italic text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             &ldquo;Kinloch Nelson plays with the virtuosity of a classical master and the sensibility of a pop performer.&rdquo;
           </blockquote>
-          <cite className="text-sm font-medium text-amber-600 mt-2 block">
+          <cite className="text-sm font-medium text-amber-600 dark:text-amber-400 mt-2 block">
             — Portland Press Herald
           </cite>
         </motion.div>

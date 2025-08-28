@@ -264,7 +264,7 @@ export default function LinksPage() {
               </Button>
               
               <Button variant="outline" asChild>
-                <a href="/studio" className="flex items-center space-x-2">
+                <a href="/recording-studio" className="flex items-center space-x-2">
                   <Radio className="h-4 w-4" />
                   <span>Recording Studio</span>
                 </a>

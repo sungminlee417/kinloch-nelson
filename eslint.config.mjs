@@ -23,6 +23,7 @@ const eslintConfig = [
   {
     rules: {
       "react/no-unescaped-entities": "off",
+      "jsx-a11y/alt-text": "off",
     },
   },
 ];

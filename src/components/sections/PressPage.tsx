@@ -5,6 +5,7 @@ import { FileText, Download, Quote, Music, ExternalLink, Image } from 'lucide-re
 import { Button } from '@/components/ui/button'
 import { client } from '../../../sanity/lib/client'
 import { PRESS_DATA_QUERY } from '../../../sanity/lib/queries'
+import { PressSkeleton } from '@/components/ui/loading'
 
 interface Biography {
   _id: string
@@ -41,7 +42,7 @@ interface PressData {
   links: Link[]
 }
 
-export default function SanityPressPage() {
+export default function PressPage() {
   const [pressData, setPressData] = useState<PressData | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -61,14 +62,7 @@ export default function SanityPressPage() {
   }, [])
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-pulse text-center">
-          <div className="h-8 bg-gray-300 rounded w-64 mx-auto mb-4"></div>
-          <div className="h-4 bg-gray-300 rounded w-96 mx-auto"></div>
-        </div>
-      </div>
-    )
+    return <PressSkeleton />
   }
 
   if (!pressData) {
