@@ -1,21 +1,29 @@
-import performance from './performance'
-import recording from './recording'
-import video from './video'
-import testimonial from './testimonial'
-import workshop from './workshop'
-import photo from './photo'
-import link from './link'
-import siteSettings from './siteSettings'
-import biography from './biography'
+// Page-based schemas
+import homepage from './pages/homepage'
+import videosPage from './pages/videosPage'
+import performancesPage from './pages/performancesPage'
+import biographyPage from './pages/biographyPage'
+import contactPage from './pages/contactPage'
+import projectsPage from './pages/projectsPage'
+import recordingsPage from './pages/recordingsPage'
+import recordingStudioPage from './pages/recordingStudioPage'
+import stanleyWatsonPage from './pages/stanleyWatsonPage'
+import linksPage from './pages/linksPage'
+import pressPage from './pages/pressPage'
+import siteSettings from './pages/siteSettings'
 
 export const schemaTypes = [
-  performance,
-  recording,
-  video,
-  testimonial,
-  workshop,
-  photo,
-  link,
+  // Page schemas
+  homepage,
+  videosPage,
+  performancesPage,
+  biographyPage,
+  contactPage,
+  projectsPage,
+  recordingsPage,
+  recordingStudioPage,
+  stanleyWatsonPage,
+  linksPage,
+  pressPage,
   siteSettings,
-  biography,
 ]
