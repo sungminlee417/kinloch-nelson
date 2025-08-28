@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import { Metadata } from 'next'
 import { Mail, Phone, MapPin, Send, Music, Calendar, Users, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
@@ -34,7 +33,7 @@ export default function ContactPage() {
     })
     
     setIsSubmitting(false)
-    alert('Thank you for your message! I\'ll get back to you soon.')
+    alert('Thank you for your message! I&apos;ll get back to you soon.')
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

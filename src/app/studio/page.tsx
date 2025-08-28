@@ -1,6 +1,5 @@
 import { Metadata } from 'next'
-import Image from 'next/image'
-import { Building, Music, Clock, MapPin, Phone, Mail, ExternalLink } from 'lucide-react'
+import { Building, Music, Clock, MapPin, Phone, Mail } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {
@@ -37,13 +36,13 @@ export default function StudioPage() {
               </h2>
               <div className="prose prose-lg">
                 <p className="text-gray-600 mb-6">
-                  Dynamic Recording Studios has been a cornerstone of Rochester's music scene, 
+                  Dynamic Recording Studios has been a cornerstone of Rochester&apos;s music scene, 
                   providing professional recording services for artists across genres. The studio 
                   features state-of-the-art equipment and acoustically designed spaces perfect 
                   for capturing the nuanced performances of acoustic instruments.
                 </p>
                 <p className="text-gray-600 mb-6">
-                  Many of Kinloch Nelson's recordings have been produced at Dynamic Recording Studios, 
+                  Many of Kinloch Nelson&apos;s recordings have been produced at Dynamic Recording Studios, 
                   taking advantage of their expertise in acoustic guitar recording and their 
                   commitment to preserving the natural warmth and dynamics of fingerstyle performances.
                 </p>
@@ -120,7 +119,7 @@ export default function StudioPage() {
               Recordings Made at Dynamic Studios
             </h2>
             <p className="text-xl text-gray-600">
-              Professional recordings showcasing the studio's capabilities
+              Professional recordings showcasing the studio&apos;s capabilities
             </p>
           </div>
 
@@ -130,7 +129,7 @@ export default function StudioPage() {
                 <Music className="h-10 w-10 text-amber-600" />
               </div>
               <h3 className="font-semibold text-gray-900 mb-2">
-                "Partly On Time: Recordings, 1968-1970"
+                &ldquo;Partly On Time: Recordings, 1968-1970&rdquo;
               </h3>
               <p className="text-gray-600 text-sm mb-4">
                 Early studio recordings showcasing developing fingerstyle techniques

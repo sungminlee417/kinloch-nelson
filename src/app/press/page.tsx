@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { FileText, Download, Quote, Music, Calendar, ExternalLink, Image } from 'lucide-react'
+import { FileText, Download, Quote, Music, ExternalLink, Image } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {
@@ -77,7 +77,7 @@ export default function PressPage() {
                 
                 <h3 className="text-xl font-semibold text-gray-900 mb-4">Medium Bio (100 words)</h3>
                 <p className="text-gray-600 p-4 bg-gray-50 rounded-lg">
-                  Kinloch Nelson is a fingerstyle guitarist whose performances showcase the virtuosity of a classical master combined with the sensibility of a contemporary performer. Based in Rochester, NY, Nelson has developed a unique approach to guitar that seamlessly weaves together American roots music, jazz standards, blues, and original compositions. His recordings, including "Partly On Time: Recordings, 1968-1970," demonstrate decades of musical evolution and technical refinement. Nelson has been featured on the Fretboard Journal Podcast and Acoustic Guitar Magazine Sessions, earning praise from critics and audiences alike for his innovative arrangements and compelling performances.
+                  Kinloch Nelson is a fingerstyle guitarist whose performances showcase the virtuosity of a classical master combined with the sensibility of a contemporary performer. Based in Rochester, NY, Nelson has developed a unique approach to guitar that seamlessly weaves together American roots music, jazz standards, blues, and original compositions. His recordings, including &ldquo;Partly On Time: Recordings, 1968-1970,&rdquo; demonstrate decades of musical evolution and technical refinement. Nelson has been featured on the Fretboard Journal Podcast and Acoustic Guitar Magazine Sessions, earning praise from critics and audiences alike for his innovative arrangements and compelling performances.
                 </p>
               </div>
               
@@ -115,7 +115,7 @@ export default function PressPage() {
                 <div key={index} className="relative bg-gray-50 rounded-lg p-6">
                   <Quote className="h-8 w-8 text-amber-400 opacity-50 mb-4" />
                   <blockquote className="text-gray-700 italic mb-4">
-                    "{quote.quote}"
+                    &ldquo;{quote.quote}&rdquo;
                   </blockquote>
                   <div className="border-l-4 border-amber-400 pl-4">
                     <cite className="not-italic">
@@ -159,7 +159,7 @@ export default function PressPage() {
             <h2 className="text-3xl font-bold text-gray-900 mb-8">Photos & Media Assets</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-6 border border-gray-200 rounded-lg">
-                <Image className="h-12 w-12 text-gray-400 mx-auto mb-4" />
+                <Image className="h-12 w-12 text-gray-400 mx-auto mb-4" aria-hidden="true" />
                 <h3 className="font-semibold text-gray-900 mb-2">High-Resolution Photos</h3>
                 <p className="text-gray-600 text-sm mb-4">Professional photos suitable for print and digital media</p>
                 <Button variant="outline" size="sm">

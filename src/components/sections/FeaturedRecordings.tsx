@@ -1,8 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Image from 'next/image'
-import { Play, ExternalLink, Music, Calendar } from 'lucide-react'
+import { ExternalLink, Music, Calendar } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 // Sample recordings data based on the original site
@@ -50,7 +49,7 @@ export default function FeaturedRecordings() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {recordings.map((recording, index) => (
+          {recordings.map((recording) => (
             <div key={recording.id} className="space-y-8">
               {/* Album Cover and Info */}
               <motion.div

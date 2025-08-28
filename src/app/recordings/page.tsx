@@ -148,7 +148,7 @@ export default function RecordingsPage() {
             <div>
               <h3 className="text-xl font-semibold text-gray-900 mb-4">Musical Approach</h3>
               <p className="text-gray-600 mb-4">
-                The recordings showcase the evolution of Nelson's fingerstyle technique, blending classical guitar 
+                The recordings showcase the evolution of Nelson&apos;s fingerstyle technique, blending classical guitar 
                 foundations with jazz harmony, blues expression, and folk sensibilities. Each track represents 
                 a different facet of this comprehensive musical approach.
               </p>

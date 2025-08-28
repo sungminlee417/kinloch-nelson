@@ -48,7 +48,7 @@ export default function BiographyPage() {
                 </div>
                 <p className="text-gray-600 text-lg leading-relaxed">
                   A virtuosic fingerstyle guitarist whose performances showcase the technical mastery of a classical musician 
-                  combined with the interpretive sensibility of a contemporary artist. Nelson's unique approach to the guitar 
+                  combined with the interpretive sensibility of a contemporary artist. Nelson&apos;s unique approach to the guitar 
                   has earned acclaim from critics and audiences throughout his career.
                 </p>
               </div>
@@ -62,9 +62,9 @@ export default function BiographyPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Musical Development</h2>
             <div className="prose prose-lg max-w-none">
               <p className="text-gray-600 mb-6">
-                Kinloch Nelson's journey with the guitar began in the rich musical landscape of the late 1960s, 
+                Kinloch Nelson&apos;s journey with the guitar began in the rich musical landscape of the late 1960s, 
                 a time of incredible innovation in both classical and popular music. His early recordings, captured 
-                in "Partly On Time: Recordings, 1968-1970," document the development of a unique voice in fingerstyle guitar.
+                in &ldquo;Partly On Time: Recordings, 1968-1970,&rdquo; document the development of a unique voice in fingerstyle guitar.
               </p>
               <p className="text-gray-600 mb-6">
                 Drawing inspiration from classical guitar traditions while embracing the improvisational spirit of jazz, 
@@ -72,7 +72,7 @@ export default function BiographyPage() {
                 combines the precision of classical training with the emotional expression found in blues and folk traditions.
               </p>
               <p className="text-gray-600">
-                Based in Rochester, New York, Nelson has maintained a connection to the region's rich musical heritage 
+                Based in Rochester, New York, Nelson has maintained a connection to the region&apos;s rich musical heritage 
                 while developing an internationally recognized style that has influenced generations of fingerstyle guitarists.
               </p>
             </div>
@@ -133,7 +133,7 @@ export default function BiographyPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900">Early Recordings (1968-1970)</h3>
                   <p className="text-gray-600">
-                    Released "Partly On Time: Recordings, 1968-1970," capturing the early development 
+                    Released &ldquo;Partly On Time: Recordings, 1968-1970,&rdquo; capturing the early development 
                     of his distinctive fingerstyle approach during a pivotal period in American music.
                   </p>
                 </div>
@@ -174,7 +174,7 @@ export default function BiographyPage() {
               His teaching approach emphasizes both technical proficiency and musical expression.
             </p>
             <p className="text-gray-600 mb-6">
-              Nelson's workshops cover a range of topics from basic fingerstyle techniques to advanced 
+              Nelson&apos;s workshops cover a range of topics from basic fingerstyle techniques to advanced 
               arrangement skills, helping students develop their own unique voice on the instrument. 
               His influence extends beyond individual students to the broader fingerstyle guitar community.
             </p>

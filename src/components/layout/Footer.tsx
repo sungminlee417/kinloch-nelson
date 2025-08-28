@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Music, Mail, Phone, MapPin, Youtube, Facebook, Instagram, ExternalLink } from 'lucide-react'
+import { Music, Mail, MapPin, Youtube, Facebook, Instagram, ExternalLink } from 'lucide-react'
 
 export default function Footer() {
   return (

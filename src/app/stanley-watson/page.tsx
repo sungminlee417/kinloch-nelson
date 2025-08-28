@@ -35,7 +35,7 @@ export default function StanleyWatsonPage() {
             <div className="prose prose-lg max-w-none">
               <p className="text-gray-600 mb-6">
                 Stanley Watson represents an important collaboration and influence in 
-                Kinloch Nelson's musical journey. This section highlights the artistic 
+                Kinloch Nelson&apos;s musical journey. This section highlights the artistic 
                 partnership and musical exchanges that have contributed to the development 
                 of fingerstyle guitar techniques and arrangements.
               </p>

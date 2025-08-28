@@ -1,5 +1,5 @@
 import { Metadata } from 'next'
-import { Link2, ExternalLink, Music, Radio, ShoppingCart, FileText } from 'lucide-react'
+import { Link2, ExternalLink, Music, Radio, FileText } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export const metadata: Metadata = {

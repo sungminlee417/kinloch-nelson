@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Menu, X, Music, Calendar, Play, FileText, User, MessageCircle, Link2, BookOpen, Camera, Mic } from 'lucide-react'
-import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 
 const navigationItems = [

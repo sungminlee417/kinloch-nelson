@@ -1,11 +1,7 @@
-import { Metadata } from 'next'
+'use client'
+
 import { Play, ExternalLink, Filter } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-
-export const metadata: Metadata = {
-  title: 'Videos | Kinloch Nelson',
-  description: 'Complete collection of video performances by Kinloch Nelson',
-}
 
 // All video titles from the original website
 const videos = [
