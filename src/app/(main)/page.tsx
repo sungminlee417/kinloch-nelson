@@ -4,7 +4,7 @@ import FeaturedVideos from '@/components/sections/FeaturedVideos'
 import FeaturedRecordings from '@/components/sections/FeaturedRecordings'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import UpcomingShows from '@/components/sections/UpcomingShows'
-import { client } from '../../sanity/lib/client'
+import { client } from '../../../sanity/lib/client'
 import { 
   BIOGRAPHY_QUERY, 
   SITE_SETTINGS_QUERY,
@@ -13,7 +13,7 @@ import {
   TESTIMONIALS_QUERY,
   LINKS_QUERY,
   PERFORMANCES_QUERY
-} from '../../sanity/lib/queries'
+} from '../../../sanity/lib/queries'
 
 // Sanity data interfaces
 interface SanityVideo {
