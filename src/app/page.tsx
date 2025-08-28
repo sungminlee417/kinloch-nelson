@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import HeroSection from '@/components/sections/HeroSection'
 import FeaturedVideos from '@/components/sections/FeaturedVideos'
 import FeaturedRecordings from '@/components/sections/FeaturedRecordings'
@@ -13,6 +14,32 @@ import {
   LINKS_QUERY,
   PERFORMANCES_QUERY
 } from '../../sanity/lib/queries'
+
+// Sanity data interfaces
+interface SanityVideo {
+  isFeatured: boolean
+  [key: string]: unknown
+}
+
+interface SanityRecording {
+  isFeatured: boolean
+  [key: string]: unknown
+}
+
+interface SanityTestimonial {
+  isFeatured: boolean
+  [key: string]: unknown
+}
+
+interface SanityLink {
+  category: string
+  [key: string]: unknown
+}
+
+interface SanityPerformance {
+  date: string
+  [key: string]: unknown
+}
 
 export default async function Home() {
   try {
@@ -43,22 +70,22 @@ export default async function Home() {
         />
         
         <FeaturedVideos 
-          videos={videos.filter((video: any) => video.isFeatured)} 
+          videos={(videos as SanityVideo[]).filter(video => video.isFeatured) as any} 
         />
         
         <FeaturedRecordings 
-          recordings={recordings.filter((recording: any) => recording.isFeatured)} 
+          recordings={(recordings as SanityRecording[]).filter(recording => recording.isFeatured) as any} 
         />
         
         <TestimonialsSection 
-          testimonials={testimonials.filter((t: any) => t.isFeatured)}
-          mediaLinks={links.filter((l: any) => ['press', 'podcast'].includes(l.category))}
+          testimonials={(testimonials as SanityTestimonial[]).filter(t => t.isFeatured) as any}
+          mediaLinks={(links as SanityLink[]).filter(l => ['press', 'podcast'].includes(l.category)) as any}
         />
         
         <UpcomingShows 
-          performances={performances
-            .filter((performance: any) => new Date(performance.date) >= new Date())
-            .sort((a: any, b: any) => new Date(a.date).getTime() - new Date(b.date).getTime())
+          performances={(performances as SanityPerformance[])
+            .filter(performance => new Date(performance.date) >= new Date())
+            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()) as any
           }
         />
       </div>

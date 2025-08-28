@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Play, Calendar, Music, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { DebugTheme } from '@/components/DebugTheme'
 
 interface Biography {
   _id: string
@@ -39,9 +38,6 @@ export default function HeroSection({ biography, siteSettings }: HeroSectionProp
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-red-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-      
-      <DebugTheme />
-      
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-4 -right-4 w-72 h-72 bg-primary/20 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse"></div>
