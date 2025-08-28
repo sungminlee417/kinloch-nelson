@@ -1,0 +1,62 @@
+{
+  "_type": "page",
+  "_id": "contact-page",
+  "title": "Contact & Booking",
+  "sections": {
+    "hero": {
+      "title": "Contact & Booking",
+      "subtitle": "Get in touch for performance bookings, lessons, or general inquiries"
+    },
+    "contactForm": {
+      "title": "Send a Message",
+      "fields": {
+        "name": { "label": "Name", "required": true },
+        "email": { "label": "Email", "required": true }, 
+        "inquiryType": {
+          "label": "Inquiry Type",
+          "options": [
+            "General Inquiry",
+            "Performance Booking", 
+            "Lessons & Workshops",
+            "Press & Media",
+            "Collaboration"
+          ]
+        },
+        "subject": { "label": "Subject", "required": true },
+        "message": { "label": "Message", "required": true }
+      }
+    },
+    "contactInfo": {
+      "title": "Get In Touch",
+      "location": "Rochester, New York",
+      "email": "contact@kinlochnelson.com",
+      "responseTime": "Usually within 24-48 hours"
+    },
+    "services": {
+      "title": "Services Available",
+      "offerings": [
+        {
+          "title": "Live Performances",
+          "description": "Solo concerts, festivals, private events"
+        },
+        {
+          "title": "Workshops & Lessons",
+          "description": "Private instruction, group workshops, masterclasses"
+        },
+        {
+          "title": "Recording Sessions", 
+          "description": "Studio recordings, collaborations"
+        }
+      ]
+    },
+    "socialMedia": {
+      "title": "Follow Along",
+      "platforms": [
+        { "name": "YouTube", "url": "https://www.youtube.com/@kinlochnelson" },
+        { "name": "Spotify", "url": "https://open.spotify.com/artist/kinlochnelson" },
+        { "name": "Bandcamp", "url": "https://kinlochnelson.bandcamp.com" },
+        { "name": "Apple Music", "url": "https://music.apple.com/artist/kinloch-nelson" }
+      ]
+    }
+  }
+}

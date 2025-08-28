@@ -1,0 +1,86 @@
+{
+  "_type": "page",
+  "_id": "projects-page",
+  "title": "Projects", 
+  "sections": {
+    "hero": {
+      "title": "Musical Projects",
+      "subtitle": "Recordings, performances, and collaborative works spanning decades of musical artistry"
+    },
+    "projects": [
+      {
+        "id": "partly-on-time-project",
+        "title": "Partly On Time: Recordings, 1968-1970",
+        "description": "A collection of early recordings showcasing the development of fingerstyle guitar techniques",
+        "type": "Album",
+        "year": "1970", 
+        "status": "Released",
+        "links": [
+          { "name": "Listen on Bandcamp", "url": "#" },
+          { "name": "Spotify", "url": "#" }
+        ]
+      },
+      {
+        "id": "dynamic-studio-sessions",
+        "title": "Dynamic Recording Studios Sessions",
+        "description": "Professional studio recordings capturing the essence of live fingerstyle performances",
+        "type": "Recording Sessions",
+        "year": "Various",
+        "status": "Ongoing",
+        "links": [
+          { "name": "Studio Information", "url": "/studio" }
+        ]
+      },
+      {
+        "id": "youtube-series",
+        "title": "YouTube Performance Series", 
+        "description": "Comprehensive video collection featuring classical arrangements, jazz standards, and original compositions",
+        "type": "Video Series",
+        "year": "Ongoing",
+        "status": "Active",
+        "links": [
+          { "name": "Watch on YouTube", "url": "https://www.youtube.com/@kinlochnelson" },
+          { "name": "View All Videos", "url": "/videos" }
+        ]
+      },
+      {
+        "id": "workshop-series",
+        "title": "Workshop & Masterclass Series",
+        "description": "Educational programs focusing on fingerstyle guitar techniques and musical interpretation",
+        "type": "Educational", 
+        "year": "Ongoing",
+        "status": "Available",
+        "links": [
+          { "name": "Workshop Details", "url": "/workshops" },
+          { "name": "Contact for Booking", "url": "/contact" }
+        ]
+      }
+    ],
+    "featuredMedia": {
+      "title": "Featured Media",
+      "subtitle": "Highlights from various projects and collaborations",
+      "features": [
+        {
+          "title": "Fretboard Journal Podcast",
+          "description": "Featured interview and performance on the acclaimed guitar podcast",
+          "ctaText": "Listen Now"
+        },
+        {
+          "title": "Acoustic Guitar Magazine Sessions",
+          "description": "Studio session and interview with premier acoustic guitar publication",
+          "ctaText": "Watch Session"
+        },
+        {
+          "title": "Live Performance Archive",
+          "description": "Collection of live performances from venues across the Northeast", 
+          "ctaText": "View Archive"
+        }
+      ]
+    },
+    "collaboration": {
+      "title": "Interested in Collaboration?",
+      "description": "Contact Kinloch Nelson to discuss musical projects, recording sessions, or performance opportunities",
+      "ctaText": "Start a Project"
+    }
+  }
+}

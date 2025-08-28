@@ -1,0 +1,54 @@
+{
+  "_type": "page",
+  "_id": "performances-page", 
+  "title": "Performance Calendar",
+  "sections": {
+    "hero": {
+      "title": "Performance Calendar",
+      "subtitle": "Join me for upcoming performances in Rochester, NY and surrounding areas"
+    },
+    "upcomingShows": [
+      {
+        "id": "evening-fingerstyle-sept",
+        "title": "Evening of Fingerstyle Guitar",
+        "date": "2024-09-15",
+        "time": "7:30 PM",
+        "venue": "The Little Theatre", 
+        "location": "Rochester, NY",
+        "description": "An intimate evening featuring original compositions and innovative arrangements.",
+        "ticketLink": "https://tickets.example.com/kinloch-nelson-sept-15",
+        "isFeatured": true
+      },
+      {
+        "id": "jazz-blues-showcase",
+        "title": "Jazz & Blues Showcase",
+        "date": "2024-09-28",
+        "time": "8:00 PM",
+        "venue": "Montage Music Hall",
+        "location": "Rochester, NY", 
+        "description": "Classic jazz standards and blues interpreted through fingerstyle technique.",
+        "ticketLink": "https://tickets.example.com/kinloch-nelson-sept-28",
+        "isFeatured": false
+      },
+      {
+        "id": "house-concert-oct",
+        "title": "House Concert Series",
+        "date": "2024-10-12",
+        "time": "6:00 PM",
+        "venue": "Private Residence",
+        "location": "Rochester, NY",
+        "description": "Intimate house concert with storytelling and musical exploration. RSVP required.",
+        "ticketLink": "mailto:contact@kinlochnelson.com?subject=House Concert RSVP", 
+        "isFeatured": false
+      }
+    ],
+    "noShowsMessage": {
+      "title": "No upcoming shows scheduled",
+      "description": "Check back soon for new performance dates, or contact me for booking inquiries.",
+      "ctaText": "Contact for Booking"
+    },
+    "viewAllCTA": {
+      "text": "View Full Performance Calendar"
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "_type": "page",
+  "_id": "press-page",
+  "title": "Press Kit",
+  "sections": {
+    "hero": {
+      "title": "Press Kit", 
+      "subtitle": "Professional media resources, photos, and promotional materials for Kinloch Nelson"
+    },
+    "artistBio": {
+      "shortBio": "Kinloch Nelson is a virtuosic fingerstyle guitarist from Rochester, NY, blending classical technique with jazz sensibilities. His performances journey through American roots, blues, and contemporary music with the skill of a master and the heart of a storyteller.",
+      "mediumBio": "Kinloch Nelson is a fingerstyle guitarist whose performances showcase the virtuosity of a classical master combined with the sensibility of a contemporary performer. Based in Rochester, NY, Nelson has developed a unique approach to guitar that seamlessly weaves together American roots music, jazz standards, blues, and original compositions. His recordings, including \"Partly On Time: Recordings, 1968-1970,\" demonstrate decades of musical evolution and technical refinement. Nelson has been featured on the Fretboard Journal Podcast and Acoustic Guitar Magazine Sessions, earning praise from critics and audiences alike for his innovative arrangements and compelling performances.",
+      "technicalInfo": {
+        "genre": "Fingerstyle Guitar, Jazz, Classical, Blues, American Roots",
+        "location": "Rochester, New York",
+        "instruments": "Acoustic Guitar, Classical Guitar",
+        "performanceType": "Solo Acoustic Guitar"
+      }
+    },
+    "pressQuotes": [
+      {
+        "quote": "Kinloch Nelson plays with the virtuosity of a classical master and the sensibility of a pop performer.",
+        "author": "Music Critic",
+        "publication": "Portland Press Herald"
+      },
+      {
+        "quote": "Kinloch Nelson is a gifted performer and a brilliant arranger who can do wonders with virtually any song.",
+        "author": "Dave Walker", 
+        "publication": "Just Jazz Magazine"
+      },
+      {
+        "quote": "Nelson's playing is a journey through American roots, jazz, country, blues, classical...",
+        "author": "Frank De Blase",
+        "publication": "City Newspaper"
+      },
+      {
+        "quote": "A seemingly effortless exhibition of inspirational skills, full of surprises...",
+        "author": "Fan Review",
+        "publication": "YouTube"
+      }
+    ],
+    "mediaFeatures": [
+      {
+        "title": "Fretboard Journal Podcast",
+        "type": "Podcast Interview",
+        "description": "In-depth discussion about fingerstyle techniques and musical influences",
+        "link": "#"
+      },
+      {
+        "title": "Acoustic Guitar Magazine Sessions",
+        "type": "Video Feature", 
+        "description": "Studio performance and interview with premier acoustic guitar publication",
+        "link": "#"
+      }
+    ],
+    "mediaAssets": {
+      "photos": {
+        "title": "High-Resolution Photos",
+        "description": "Professional photos suitable for print and digital media"
+      },
+      "audio": {
+        "title": "Audio Samples",
+        "description": "High-quality audio clips from recordings and performances"
+      },
+      "graphics": {
+        "title": "Logo & Graphics", 
+        "description": "Logos, promotional graphics, and brand assets"
+      }
+    },
+    "technicalRider": {
+      "soundRequirements": [
+        "High-quality acoustic guitar pickup system",
+        "Professional acoustic guitar amplification", 
+        "Stage monitoring as needed",
+        "Quiet, intimate venue preferred"
+      ],
+      "venueInfo": [
+        "Solo acoustic performance",
+        "Seated audience preferred",
+        "Minimal stage lighting required",
+        "Acoustic-friendly environment"
+      ]
+    },
+    "contact": {
+      "title": "Press Inquiries",
+      "description": "For interviews, additional materials, or booking information",
+      "ctaText": "Contact for Press"
+    }
+  }
+}

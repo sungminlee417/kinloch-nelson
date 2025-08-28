@@ -1,0 +1,121 @@
+{
+  "_type": "page",
+  "_id": "workshops-page", 
+  "title": "Workshops & Private Instruction",
+  "sections": {
+    "hero": {
+      "title": "Workshops & Private Instruction",
+      "subtitle": "Learn fingerstyle guitar techniques from an experienced performer and educator"
+    },
+    "offerings": [
+      {
+        "id": "private-lessons",
+        "title": "Private Guitar Instruction",
+        "type": "private",
+        "description": "One-on-one lessons tailored to your skill level and musical interests, focusing on fingerstyle technique, arrangement skills, and musical expression.",
+        "duration": "60 minutes",
+        "skillLevel": "all",
+        "price": "Contact for rates",
+        "location": "Rochester, NY or Online",
+        "schedule": "Flexible scheduling available",
+        "contactInfo": "Email to arrange initial consultation"
+      },
+      {
+        "id": "group-workshops",
+        "title": "Fingerstyle Guitar Workshop",
+        "type": "group", 
+        "description": "Small group workshops covering fundamental fingerstyle techniques, basic arrangements, and performance skills.",
+        "duration": "3 hours",
+        "skillLevel": "beginner",
+        "price": "Contact for group rates",
+        "location": "Rochester, NY",
+        "schedule": "Weekend workshops throughout the year",
+        "contactInfo": "Email for upcoming workshop dates"
+      },
+      {
+        "id": "masterclass",
+        "title": "Advanced Arrangement Masterclass",
+        "type": "masterclass",
+        "description": "Intensive masterclass for experienced players focusing on advanced arrangement techniques, jazz harmony integration, and performance interpretation.",
+        "duration": "Full day",
+        "skillLevel": "advanced", 
+        "price": "Contact for details",
+        "location": "Special venues and music schools",
+        "schedule": "Periodic offerings",
+        "contactInfo": "Email for scheduling and availability"
+      },
+      {
+        "id": "online-course",
+        "title": "Online Fingerstyle Fundamentals",
+        "type": "online",
+        "description": "Self-paced online course covering the basics of fingerstyle guitar, including technique, simple arrangements, and practice methods.", 
+        "duration": "Self-paced",
+        "skillLevel": "beginner",
+        "price": "Coming Soon",
+        "location": "Online",
+        "schedule": "Available 24/7",
+        "contactInfo": "Join mailing list for updates"
+      }
+    ],
+    "teachingApproach": {
+      "title": "Teaching Philosophy",
+      "content": [
+        "My teaching approach emphasizes both technical proficiency and musical expression. Students learn not just how to play the notes, but how to make them sing with meaning and emotion.",
+        "Each lesson is tailored to the individual student's goals, whether they're interested in classical technique, jazz arrangements, blues expression, or developing their own compositional voice.",
+        "I believe in building a strong foundation of proper technique while encouraging creativity and personal musical development."
+      ]
+    },
+    "curriculum": {
+      "title": "What You'll Learn",
+      "topics": [
+        {
+          "category": "Technique",
+          "skills": [
+            "Proper hand position and posture",
+            "Fingerpicking patterns and variations", 
+            "Thumb independence and bass lines",
+            "Melody and harmony integration"
+          ]
+        },
+        {
+          "category": "Musical Concepts",
+          "skills": [
+            "Chord progressions and harmony",
+            "Rhythm and timing",
+            "Musical phrasing and expression",
+            "Style recognition and adaptation"
+          ]
+        },
+        {
+          "category": "Arrangement Skills", 
+          "skills": [
+            "Creating fingerstyle arrangements",
+            "Voice leading and counterpoint",
+            "Adding bass lines to melodies",
+            "Developing personal style"
+          ]
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "Student Testimonials",
+      "quotes": [
+        {
+          "quote": "Kinloch's teaching has completely transformed my approach to the guitar. His focus on musicality alongside technique has made me a much more complete player.",
+          "author": "Sarah M.",
+          "level": "Intermediate Student"
+        },
+        {
+          "quote": "The workshop was incredibly informative and inspiring. I learned techniques I never would have discovered on my own.",
+          "author": "Mike R.", 
+          "level": "Workshop Participant"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Ready to Start Learning?",
+      "description": "Contact Kinloch Nelson to discuss lesson options, workshop schedules, or to arrange a consultation.",
+      "ctaText": "Contact for Lessons"
+    }
+  }
+}

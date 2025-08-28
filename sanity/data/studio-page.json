@@ -1,0 +1,56 @@
+{
+  "_type": "page",
+  "_id": "studio-page", 
+  "title": "Dynamic Recording Studios",
+  "sections": {
+    "hero": {
+      "title": "Dynamic Recording Studios",
+      "subtitle": "Professional recording facility in Rochester, NY - Where artistry meets technology"
+    },
+    "studioInfo": {
+      "title": "About the Studio",
+      "description": [
+        "Dynamic Recording Studios has been a cornerstone of Rochester's music scene, providing professional recording services for artists across genres. The studio features state-of-the-art equipment and acoustically designed spaces perfect for capturing the nuanced performances of acoustic instruments.",
+        "Many of Kinloch Nelson's recordings have been produced at Dynamic Recording Studios, taking advantage of their expertise in acoustic guitar recording and their commitment to preserving the natural warmth and dynamics of fingerstyle performances."
+      ],
+      "features": [
+        "Professional acoustic recording spaces",
+        "High-end microphones and preamps", 
+        "Digital and analog recording capabilities",
+        "Professional mixing and mastering",
+        "Experienced engineering staff"
+      ]
+    },
+    "contact": {
+      "location": "Rochester, New York",
+      "phone": "Contact for studio rates",
+      "hours": "By appointment"
+    },
+    "recordingsMade": {
+      "title": "Recordings Made at Dynamic Studios",
+      "subtitle": "Professional recordings showcasing the studio's capabilities",
+      "albums": [
+        {
+          "title": "\"Partly On Time: Recordings, 1968-1970\"",
+          "description": "Early studio recordings showcasing developing fingerstyle techniques",
+          "ctaText": "View Album Details"
+        },
+        {
+          "title": "Studio Sessions",
+          "description": "Various recording projects and collaborative works",
+          "ctaText": "Explore Recordings"
+        },
+        {
+          "title": "Live Studio Performances", 
+          "description": "Intimate studio performances capturing the essence of live music",
+          "ctaText": "Watch Videos"
+        }
+      ]
+    },
+    "callToAction": {
+      "title": "Interested in Recording?",
+      "description": "Contact Kinloch Nelson for information about recording sessions and studio availability",
+      "ctaText": "Get in Touch"
+    }
+  }
+}
