@@ -141,3 +141,32 @@ export const FEATURED_CONTENT_QUERY = `{
     publication
   }
 }`
+
+export const PRESS_DATA_QUERY = `{
+  "biography": *[_type == "biography"][0] {
+    _id,
+    name,
+    tagline,
+    location,
+    shortBio,
+    fullBio,
+    genres,
+    instruments,
+    achievements
+  },
+  "testimonials": *[_type == "testimonial"] | order(order asc) {
+    _id,
+    quote,
+    author,
+    publication,
+    order
+  },
+  "links": *[_type == "link" && category == "press"] | order(order asc) {
+    _id,
+    title,
+    url,
+    description,
+    category,
+    order
+  }
+}`

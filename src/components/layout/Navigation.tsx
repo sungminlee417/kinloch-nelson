@@ -18,7 +18,7 @@ const navigationItems = [
   { name: 'Photos', href: '/photos', icon: Camera },
   { name: 'Contact', href: '/contact', icon: MessageCircle },
   { name: 'Links', href: '/links', icon: Link2 },
-  { name: 'Studio', href: '/studio', icon: Mic },
+  { name: 'Recording Studio', href: '/recording-studio', icon: Mic },
 ]
 
 export default function Navigation() {
