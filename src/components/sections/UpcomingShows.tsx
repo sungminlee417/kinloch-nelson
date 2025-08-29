@@ -22,14 +22,14 @@ interface UpcomingShowsProps {
 export default function UpcomingShows({ performances }: UpcomingShowsProps) {
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-4xl font-bold text-gray-900 mb-4"
+            className="text-4xl font-bold text-gray-900 dark:text-white mb-4"
           >
             Performance Calendar
           </motion.h2>
@@ -37,7 +37,7 @@ export default function UpcomingShows({ performances }: UpcomingShowsProps) {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
+            className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
           >
             Join me for upcoming performances in Rochester, NY and surrounding areas
           </motion.p>
@@ -51,16 +51,16 @@ export default function UpcomingShows({ performances }: UpcomingShowsProps) {
                 initial={{ opacity: 0, x: -30 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
-                className={`bg-white rounded-lg shadow-lg border-l-4 overflow-hidden ${
-                  show.isFeatured ? 'border-amber-400' : 'border-gray-300'
+                className={`bg-white dark:bg-gray-800 rounded-lg shadow-lg border-l-4 overflow-hidden ${
+                  show.isFeatured ? 'border-amber-400' : 'border-gray-300 dark:border-gray-600'
                 }`}
               >
                 <div className="p-6">
                   <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-2 mb-2">
-                        <Calendar className="h-5 w-5 text-amber-600" />
-                        <span className="text-lg font-semibold text-gray-900">
+                        <Calendar className="h-5 w-5 text-amber-600 dark:text-amber-400" />
+                        <span className="text-lg font-semibold text-gray-900 dark:text-white">
                           {new Date(show.date).toLocaleDateString('en-US', {
                             weekday: 'long',
                             year: 'numeric',
@@ -69,19 +69,19 @@ export default function UpcomingShows({ performances }: UpcomingShowsProps) {
                           })}
                         </span>
                         {show.isFeatured && (
-                          <span className="bg-amber-100 text-amber-800 text-xs font-medium px-2 py-1 rounded-full">
+                          <span className="bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 text-xs font-medium px-2 py-1 rounded-full">
                             Featured
                           </span>
                         )}
                       </div>
 
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
+                      <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
                         {show.title}
                       </h3>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 mb-4">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-gray-600 dark:text-gray-400 mb-4">
                         <div className="flex items-center space-x-2">
-                          <Clock className="h-4 w-4 text-amber-600" />
+                          <Clock className="h-4 w-4 text-amber-600 dark:text-amber-400" />
                           <span>{new Date(show.date).toLocaleTimeString('en-US', { 
                             hour: 'numeric', 
                             minute: '2-digit',
@@ -89,12 +89,12 @@ export default function UpcomingShows({ performances }: UpcomingShowsProps) {
                           })}</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <MapPin className="h-4 w-4 text-amber-600" />
+                          <MapPin className="h-4 w-4 text-amber-600 dark:text-amber-400" />
                           <span>{show.venue}, {show.location}</span>
                         </div>
                       </div>
 
-                      <p className="text-gray-600 mb-4 lg:mb-0">
+                      <p className="text-gray-600 dark:text-gray-400 mb-4 lg:mb-0">
                         {show.description}
                       </p>
                     </div>
@@ -126,13 +126,13 @@ export default function UpcomingShows({ performances }: UpcomingShowsProps) {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="text-center py-12 bg-gray-50 rounded-lg"
+            className="text-center py-12 bg-gray-50 dark:bg-gray-800 rounded-lg"
           >
-            <Calendar className="h-16 w-16 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+            <Calendar className="h-16 w-16 text-gray-400 dark:text-gray-500 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-600 dark:text-gray-400 mb-2">
               No upcoming shows scheduled
             </h3>
-            <p className="text-gray-500 mb-4">
+            <p className="text-gray-500 dark:text-gray-500 mb-4">
               Check back soon for new performance dates, or contact me for booking inquiries.
             </p>
             <Button variant="outline" asChild>
