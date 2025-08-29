@@ -46,7 +46,7 @@ export default function VideosPage({ videosPageData }: VideosPageProps) {
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null)
   const [imageErrors, setImageErrors] = useState<Set<string>>(new Set())
   
-  const videos = videosPageData.videos || []
+  const videos = useMemo(() => videosPageData.videos || [], [videosPageData.videos])
   const pageHeader = videosPageData.pageHeader || {
     title: 'Video Collection',
     subtitle: 'Complete collection of performances, interviews, and educational content'
