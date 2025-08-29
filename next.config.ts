@@ -4,9 +4,9 @@ const nextConfig: NextConfig = {
   // Enable transpilation for Sanity Studio
   transpilePackages: ['next-sanity'],
   
-  // Allow loading from Sanity CDN
+  // Allow loading from Sanity CDN and YouTube thumbnails
   images: {
-    domains: ['cdn.sanity.io'],
+    domains: ['cdn.sanity.io', 'img.youtube.com'],
   },
   
   // Ensure proper handling of studio route

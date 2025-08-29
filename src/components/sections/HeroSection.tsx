@@ -2,31 +2,41 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Play, Calendar, Music, ExternalLink } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-interface Biography {
-  _id: string
+interface HeroData {
   name: string
   tagline: string
   location: string
   shortBio: string
+  profileImage?: string
+  ctaButtons?: Array<{
+    text: string
+    url: string
+    style: 'primary' | 'secondary'
+  }>
+  featuredQuote?: {
+    text: string
+    attribution: string
+  }
 }
 
 interface SiteSettings {
   _id: string
-  title: string
-  description: string
+  siteTitle: string
+  siteDescription: string
   donationLink: string
 }
 
 interface HeroSectionProps {
-  biography: Biography
+  heroData: HeroData
   siteSettings: SiteSettings
 }
 
-export default function HeroSection({ biography, siteSettings }: HeroSectionProps) {
-  if (!biography || !siteSettings) {
+export default function HeroSection({ heroData, siteSettings }: HeroSectionProps) {
+  if (!heroData) {
     return (
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
         <div className="text-center text-gray-600">
@@ -63,14 +73,14 @@ export default function HeroSection({ biography, siteSettings }: HeroSectionProp
             >
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4">
                 <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-                  {biography.name.split(' ')[0]}
+                  {heroData.name.split(' ')[0]}
                 </span>
                 <br />
-                <span className="text-gray-800 dark:text-gray-200">{biography.name.split(' ')[1]}</span>
+                <span className="text-gray-800 dark:text-gray-200">{heroData.name.split(' ')[1]}</span>
               </h1>
               <div className="flex items-center justify-center lg:justify-start space-x-2 text-gray-600 dark:text-gray-400">
                 <Music className="h-5 w-5" />
-                <span className="text-lg font-medium">{biography.tagline} • {biography.location}</span>
+                <span className="text-lg font-medium">{heroData.tagline} • {heroData.location}</span>
               </div>
             </motion.div>
 
@@ -81,7 +91,7 @@ export default function HeroSection({ biography, siteSettings }: HeroSectionProp
               transition={{ delay: 0.4, duration: 0.6 }}
               className="text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed"
             >
-              {biography.shortBio}
+              {heroData.shortBio}
             </motion.p>
 
             {/* Call-to-action buttons */}
@@ -91,25 +101,45 @@ export default function HeroSection({ biography, siteSettings }: HeroSectionProp
               transition={{ delay: 0.6, duration: 0.6 }}
               className="space-y-4"
             >
-              {/* Primary CTAs */}
+              {/* Dynamic CTA buttons from Sanity */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <Button asChild size="lg" className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700">
-                  <Link href="/videos" className="flex items-center space-x-2">
-                    <Play className="h-5 w-5" />
-                    <span>Watch Performances</span>
-                  </Link>
-                </Button>
-                
-                <Button asChild variant="outline" size="lg">
-                  <Link href="/performances" className="flex items-center space-x-2">
-                    <Calendar className="h-5 w-5" />
-                    <span>Upcoming Shows</span>
-                  </Link>
-                </Button>
+                {heroData.ctaButtons?.length ? (
+                  heroData.ctaButtons.map((button, index) => (
+                    <Button 
+                      key={index}
+                      asChild 
+                      size="lg" 
+                      variant={button.style === 'primary' ? 'default' : 'outline'}
+                      className={button.style === 'primary' ? 'bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700' : ''}
+                    >
+                      <Link href={button.url} className="flex items-center space-x-2">
+                        {button.url.includes('video') ? <Play className="h-5 w-5" /> : <Calendar className="h-5 w-5" />}
+                        <span>{button.text}</span>
+                      </Link>
+                    </Button>
+                  ))
+                ) : (
+                  // Default buttons if none configured
+                  <>
+                    <Button asChild size="lg" className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700">
+                      <Link href="/videos" className="flex items-center space-x-2">
+                        <Play className="h-5 w-5" />
+                        <span>Watch Performances</span>
+                      </Link>
+                    </Button>
+                    
+                    <Button asChild variant="outline" size="lg">
+                      <Link href="/performances" className="flex items-center space-x-2">
+                        <Calendar className="h-5 w-5" />
+                        <span>Upcoming Shows</span>
+                      </Link>
+                    </Button>
+                  </>
+                )}
               </div>
 
               {/* Donation link */}
-              {siteSettings.donationLink && (
+              {siteSettings?.donationLink && (
                 <div className="text-center lg:text-left">
                   <a 
                     href={siteSettings.donationLink} 
@@ -133,19 +163,20 @@ export default function HeroSection({ biography, siteSettings }: HeroSectionProp
             className="relative"
           >
             <div className="relative w-full max-w-lg mx-auto">
-              {/* Placeholder for profile image - replace with actual image */}
               <div className="aspect-square rounded-full bg-gradient-to-br from-amber-100 to-orange-100 shadow-2xl overflow-hidden">
-                <div className="w-full h-full flex items-center justify-center text-amber-600">
-                  <Music className="h-32 w-32" />
-                </div>
-                {/* Uncomment when you have the actual image */}
-                {/* <Image
-                  src="/kinloch-portrait.jpg"
-                  alt="Kinloch Nelson"
-                  fill
-                  className="object-cover"
-                  priority
-                /> */}
+                {heroData.profileImage ? (
+                  <Image
+                    src={heroData.profileImage}
+                    alt={heroData.name}
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-amber-600">
+                    <Music className="h-32 w-32" />
+                  </div>
+                )}
               </div>
 
               {/* Decorative elements */}
@@ -155,20 +186,24 @@ export default function HeroSection({ biography, siteSettings }: HeroSectionProp
           </motion.div>
         </div>
 
-        {/* Featured quote - could be made dynamic by fetching featured testimonial */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-          className="mt-16 text-center"
-        >
-          <blockquote className="text-lg italic text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            &ldquo;Kinloch Nelson plays with the virtuosity of a classical master and the sensibility of a pop performer.&rdquo;
-          </blockquote>
-          <cite className="text-sm font-medium text-amber-600 dark:text-amber-400 mt-2 block">
-            — Portland Press Herald
-          </cite>
-        </motion.div>
+        {/* Featured quote from Sanity */}
+        {heroData.featuredQuote?.text && (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.8, duration: 0.6 }}
+            className="mt-16 text-center"
+          >
+            <blockquote className="text-lg italic text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+              &ldquo;{heroData.featuredQuote.text}&rdquo;
+            </blockquote>
+            {heroData.featuredQuote.attribution && (
+              <cite className="text-sm font-medium text-amber-600 dark:text-amber-400 mt-2 block">
+                — {heroData.featuredQuote.attribution}
+              </cite>
+            )}
+          </motion.div>
+        )}
       </div>
     </section>
   )

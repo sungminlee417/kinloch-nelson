@@ -111,6 +111,109 @@ export const SITE_SETTINGS_QUERY = `*[_type == "siteSettings"][0] {
   seoSettings
 }`
 
+// New page-based queries
+export const HOMEPAGE_QUERY = `*[_type == "homepage"][0] {
+  _id,
+  heroSection {
+    name,
+    tagline,
+    location,
+    shortBio,
+    "profileImage": profileImage.asset->url,
+    ctaButtons[] {
+      text,
+      url,
+      style
+    },
+    featuredQuote {
+      text,
+      attribution
+    }
+  },
+  featuredVideos[] {
+    _key,
+    title,
+    youtubeUrl,
+    description,
+    category,
+    publishedAt,
+    isFeatured,
+    order
+  },
+  featuredRecordings[] {
+    _key,
+    title,
+    "coverImage": coverImage.asset->url,
+    description,
+    releaseDate,
+    streamingLinks[] {
+      platform,
+      url
+    },
+    isFeatured
+  },
+  testimonials[] {
+    _key,
+    quote,
+    author,
+    publication,
+    "authorImage": authorImage.asset->url,
+    isFeatured,
+    order
+  },
+  upcomingShows[] {
+    _key,
+    title,
+    date,
+    venue,
+    location,
+    description,
+    ticketLink,
+    isFeatured
+  }
+}`
+
+export const VIDEOS_PAGE_QUERY = `*[_type == "videosPage"][0] {
+  _id,
+  pageHeader {
+    title,
+    subtitle
+  },
+  videos[] {
+    _key,
+    title,
+    youtubeUrl,
+    description,
+    category,
+    publishedAt,
+    isFeatured,
+    order
+  },
+  youtubeChannel {
+    channelUrl,
+    callToAction,
+    description
+  }
+}`
+
+export const SITE_SETTINGS_PAGE_QUERY = `*[_type == "siteSettings"][0] {
+  _id,
+  siteTitle,
+  siteDescription,
+  keywords,
+  "ogImage": ogImage.asset->url,
+  "favicon": favicon.asset->url,
+  donationLink,
+  analyticsId,
+  copyright,
+  footerLinks[] {
+    title,
+    url
+  },
+  maintenanceMode,
+  youtubeChannelUrl
+}`
+
 export const FEATURED_CONTENT_QUERY = `{
   "performances": *[_type == "performance" && isFeatured == true] | order(date desc) [0...3] {
     _id,

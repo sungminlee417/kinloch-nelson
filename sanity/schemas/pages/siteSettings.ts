@@ -66,6 +66,14 @@ export default defineType({
     }),
 
     defineField({
+      name: 'youtubeChannelUrl',
+      title: 'YouTube Channel URL',
+      type: 'url',
+      description: 'Link to your YouTube channel',
+      placeholder: 'https://www.youtube.com/@kinlochnelson',
+    }),
+
+    defineField({
       name: 'analyticsId',
       title: 'Google Analytics ID',
       type: 'string',

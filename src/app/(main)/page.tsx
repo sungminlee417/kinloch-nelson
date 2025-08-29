@@ -6,90 +6,52 @@ import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import UpcomingShows from '@/components/sections/UpcomingShows'
 import { client } from '../../../sanity/lib/client'
 import { 
-  BIOGRAPHY_QUERY, 
-  SITE_SETTINGS_QUERY,
-  VIDEOS_QUERY,
-  RECORDINGS_QUERY,
-  TESTIMONIALS_QUERY,
-  LINKS_QUERY,
-  PERFORMANCES_QUERY
+  HOMEPAGE_QUERY,
+  SITE_SETTINGS_PAGE_QUERY
 } from '../../../sanity/lib/queries'
 
 // ISR: Revalidate every minute
 export const revalidate = 60
 
-// Sanity data interfaces
-interface SanityVideo {
-  isFeatured: boolean
-  [key: string]: unknown
-}
-
-interface SanityRecording {
-  isFeatured: boolean
-  [key: string]: unknown
-}
-
-interface SanityTestimonial {
-  isFeatured: boolean
-  [key: string]: unknown
-}
-
-interface SanityLink {
-  category: string
-  [key: string]: unknown
-}
-
-interface SanityPerformance {
-  date: string
-  [key: string]: unknown
-}
-
 export default async function Home() {
   try {
-    // Fetch all data in parallel for optimal performance
-    const [
-      biography,
-      siteSettings,
-      videos,
-      recordings,
-      testimonials,
-      links,
-      performances
-    ] = await Promise.all([
-      client.fetch(BIOGRAPHY_QUERY),
-      client.fetch(SITE_SETTINGS_QUERY),
-      client.fetch(VIDEOS_QUERY),
-      client.fetch(RECORDINGS_QUERY),
-      client.fetch(TESTIMONIALS_QUERY),
-      client.fetch(LINKS_QUERY),
-      client.fetch(PERFORMANCES_QUERY)
+    // Fetch homepage and site settings data
+    const [homepage, siteSettings] = await Promise.all([
+      client.fetch(HOMEPAGE_QUERY),
+      client.fetch(SITE_SETTINGS_PAGE_QUERY)
     ])
+
+    if (!homepage) {
+      return (
+        <div className="min-h-screen flex items-center justify-center">
+          <p>Unable to load homepage content</p>
+        </div>
+      )
+    }
 
     return (
       <div className="min-h-screen">
         <HeroSection 
-          biography={biography} 
+          heroData={homepage.heroSection} 
           siteSettings={siteSettings} 
         />
         
         <FeaturedVideos 
-          videos={(videos as SanityVideo[]).filter(video => video.isFeatured) as any} 
+          videos={homepage.featuredVideos || []} 
+          youtubeChannelUrl={siteSettings?.youtubeChannelUrl}
         />
         
         <FeaturedRecordings 
-          recordings={(recordings as SanityRecording[]).filter(recording => recording.isFeatured) as any} 
+          recordings={homepage.featuredRecordings || []} 
         />
         
         <TestimonialsSection 
-          testimonials={(testimonials as SanityTestimonial[]).filter(t => t.isFeatured) as any}
-          mediaLinks={(links as SanityLink[]).filter(l => ['press', 'podcast'].includes(l.category)) as any}
+          testimonials={homepage.testimonials || []}
+          mediaLinks={[]}
         />
         
         <UpcomingShows 
-          performances={(performances as SanityPerformance[])
-            .filter(performance => new Date(performance.date) >= new Date())
-            .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()) as any
-          }
+          performances={homepage.upcomingShows?.filter((show: any) => new Date(show.date) >= new Date()) || []}
         />
       </div>
     )
