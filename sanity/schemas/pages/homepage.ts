@@ -270,6 +270,21 @@ export default defineType({
         }),
       ],
     }),
+
+    // Media Features
+    defineField({
+      name: 'mediaFeatures',
+      title: 'Featured Media',
+      type: 'array',
+      of: [
+        {
+          type: 'reference',
+          to: [{ type: 'mediaFeature' }],
+        },
+      ],
+      validation: Rule => Rule.max(6),
+      description: 'Select up to 6 media features to display in the "Featured In" section',
+    }),
   ],
   
   preview: {

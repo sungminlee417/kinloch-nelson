@@ -171,13 +171,15 @@ export const HOMEPAGE_QUERY = `*[_type == "homepage"][0] {
     ticketLink,
     isFeatured
   },
-  "mediaFeatures": *[_type == "mediaFeature" && isFeatured == true] | order(order asc, publicationDate desc) [0...6] {
+  mediaFeatures[]-> {
     _id,
     title,
     description,
     url,
     publicationDate,
-    category
+    category,
+    isFeatured,
+    order
   }
 }`
 
