@@ -65,13 +65,6 @@ export default defineType({
       description: 'Link to donation platform (e.g., Venmo, PayPal)',
     }),
 
-    defineField({
-      name: 'youtubeChannelUrl',
-      title: 'YouTube Channel URL',
-      type: 'url',
-      description: 'Link to your YouTube channel',
-      placeholder: 'https://www.youtube.com/@kinlochnelson',
-    }),
 
     defineField({
       name: 'analyticsId',

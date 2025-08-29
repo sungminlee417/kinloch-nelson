@@ -12,6 +12,9 @@ import linksPage from './pages/linksPage'
 import pressPage from './pages/pressPage'
 import siteSettings from './pages/siteSettings'
 
+// Content schemas
+import mediaFeature from './mediaFeature'
+
 export const schemaTypes = [
   // Page schemas
   homepage,
@@ -26,4 +29,7 @@ export const schemaTypes = [
   linksPage,
   pressPage,
   siteSettings,
+  
+  // Content schemas
+  mediaFeature,
 ]

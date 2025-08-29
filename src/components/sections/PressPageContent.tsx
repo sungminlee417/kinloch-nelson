@@ -1,11 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import { FileText, Download, Quote, Music, ExternalLink, Image } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { client } from '../../../sanity/lib/client'
-import { PRESS_DATA_QUERY } from '../../../sanity/lib/queries'
-import { PressSkeleton } from '@/components/ui/loading'
 
 interface Biography {
   _id: string
@@ -42,38 +38,11 @@ interface PressData {
   links: Link[]
 }
 
-export default function PressPage() {
-  const [pressData, setPressData] = useState<PressData | null>(null)
-  const [loading, setLoading] = useState(true)
+interface PressPageContentProps {
+  pressData: PressData
+}
 
-  useEffect(() => {
-    const fetchPressData = async () => {
-      try {
-        const data = await client.fetch(PRESS_DATA_QUERY)
-        setPressData(data)
-      } catch (error) {
-        console.error('Error fetching press data:', error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPressData()
-  }, [])
-
-  if (loading) {
-    return <PressSkeleton />
-  }
-
-  if (!pressData) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-gray-600">Press data not available</p>
-        </div>
-      </div>
-    )
-  }
+export default function PressPageContent({ pressData }: PressPageContentProps) {
 
   return (
     <div className="min-h-screen bg-gray-50">

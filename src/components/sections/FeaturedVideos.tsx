@@ -1,38 +1,41 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import { Play, ExternalLink } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import Image from 'next/image'
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Play, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 // Helper function to extract YouTube video ID from URL
 function getYouTubeVideoId(url: string): string {
-  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/
-  const match = url.match(regExp)
-  return match && match[2].length === 11 ? match[2] : ''
+  const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+  const match = url.match(regExp);
+  return match && match[2].length === 11 ? match[2] : "";
 }
 
 interface Video {
-  _id: string
-  title: string
-  youtubeUrl: string
-  description: string
-  category: string
-  isFeatured: boolean
+  _id: string;
+  title: string;
+  youtubeUrl: string;
+  description: string;
+  category: string;
+  isFeatured: boolean;
 }
 
 interface FeaturedVideosProps {
-  videos: Video[]
-  youtubeChannelUrl?: string
+  videos: Video[];
+  youtubeChannelUrl?: string;
 }
 
-export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVideosProps) {
-  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null)
-  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set())
-  
+export default function FeaturedVideos({
+  videos,
+  youtubeChannelUrl,
+}: FeaturedVideosProps) {
+  const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+  const [imageErrors, setImageErrors] = useState<Set<string>>(new Set());
+
   if (!videos || videos.length === 0) {
-    return null
+    return null;
   }
 
   return (
@@ -53,7 +56,8 @@ export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVi
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
           >
-            Watch live performances and studio recordings showcasing the artistry of fingerstyle guitar
+            Watch live performances and studio recordings showcasing the
+            artistry of fingerstyle guitar
           </motion.p>
         </div>
 
@@ -70,9 +74,10 @@ export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVi
               <div className="relative aspect-video bg-gray-200 overflow-hidden">
                 {/* YouTube thumbnail */}
                 <Image
-                  src={imageErrors.has(video._id || `video-${index}`) 
-                    ? '/images/video-placeholder.svg' 
-                    : `https://img.youtube.com/vi/${getYouTubeVideoId(video.youtubeUrl)}/hqdefault.jpg`
+                  src={
+                    imageErrors.has(video._id || `video-${index}`)
+                      ? "/images/video-placeholder.svg"
+                      : `https://img.youtube.com/vi/${getYouTubeVideoId(video.youtubeUrl)}/hqdefault.jpg`
                   }
                   alt={video.title}
                   fill
@@ -81,11 +86,11 @@ export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVi
                   className="object-cover"
                   onError={() => {
                     const videoKey = video._id || `video-${index}`;
-                    setImageErrors(prev => new Set(prev).add(videoKey));
+                    setImageErrors((prev) => new Set(prev).add(videoKey));
                   }}
                 />
                 {/* Play overlay */}
-                <div 
+                <div
                   className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center cursor-pointer"
                   onClick={() => setSelectedVideo(video)}
                 >
@@ -116,7 +121,7 @@ export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVi
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => window.open(video.youtubeUrl, '_blank')}
+                    onClick={() => window.open(video.youtubeUrl, "_blank")}
                   >
                     <ExternalLink className="h-4 w-4" />
                   </Button>
@@ -134,10 +139,14 @@ export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVi
             transition={{ duration: 0.6, delay: 0.4 }}
             className="text-center mt-12"
           >
-            <Button asChild size="lg" className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700">
-              <a 
-                href={youtubeChannelUrl} 
-                target="_blank" 
+            <Button
+              asChild
+              size="lg"
+              className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+            >
+              <a
+                href={youtubeChannelUrl}
+                target="_blank"
                 rel="noopener noreferrer"
               >
                 <ExternalLink className="h-5 w-5 mr-2" />
@@ -164,7 +173,7 @@ export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVi
                   ×
                 </button>
               </div>
-              
+
               <div className="aspect-video mb-4">
                 <iframe
                   src={`https://www.youtube.com/embed/${getYouTubeVideoId(selectedVideo.youtubeUrl)}`}
@@ -175,7 +184,7 @@ export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVi
                   className="w-full h-full rounded"
                 ></iframe>
               </div>
-              
+
               <div className="flex items-center gap-2 mb-4">
                 <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-800 dark:bg-amber-900 dark:text-amber-200">
                   {selectedVideo.category}
@@ -186,16 +195,18 @@ export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVi
                   </span>
                 )}
               </div>
-              
+
               {selectedVideo.description && (
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
                   {selectedVideo.description}
                 </p>
               )}
-              
+
               <div className="flex gap-3">
                 <Button
-                  onClick={() => window.open(selectedVideo.youtubeUrl, '_blank')}
+                  onClick={() =>
+                    window.open(selectedVideo.youtubeUrl, "_blank")
+                  }
                   className="bg-amber-600 hover:bg-amber-700"
                 >
                   <ExternalLink className="h-4 w-4 mr-2" />
@@ -213,5 +224,5 @@ export default function FeaturedVideos({ videos, youtubeChannelUrl }: FeaturedVi
         </div>
       )}
     </section>
-  )
+  );
 }

@@ -1,41 +1,44 @@
-'use client'
+"use client";
 
-import { motion } from 'framer-motion'
-import Link from 'next/link'
-import Image from 'next/image'
-import { Play, Calendar, Music, ExternalLink } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { motion } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
+import { Play, Calendar, Music, ExternalLink } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface HeroData {
-  name: string
-  tagline: string
-  location: string
-  shortBio: string
-  profileImage?: string
+  name: string;
+  tagline: string;
+  location: string;
+  shortBio: string;
+  profileImage?: string;
   ctaButtons?: Array<{
-    text: string
-    url: string
-    style: 'primary' | 'secondary'
-  }>
+    text: string;
+    url: string;
+    style: "primary" | "secondary";
+  }>;
   featuredQuote?: {
-    text: string
-    attribution: string
-  }
+    text: string;
+    attribution: string;
+  };
 }
 
 interface SiteSettings {
-  _id: string
-  siteTitle: string
-  siteDescription: string
-  donationLink: string
+  _id: string;
+  siteTitle: string;
+  siteDescription: string;
+  donationLink: string;
 }
 
 interface HeroSectionProps {
-  heroData: HeroData
-  siteSettings: SiteSettings
+  heroData: HeroData;
+  siteSettings: SiteSettings;
 }
 
-export default function HeroSection({ heroData, siteSettings }: HeroSectionProps) {
+export default function HeroSection({
+  heroData,
+  siteSettings,
+}: HeroSectionProps) {
   if (!heroData) {
     return (
       <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-red-50">
@@ -43,7 +46,7 @@ export default function HeroSection({ heroData, siteSettings }: HeroSectionProps
           <p>Unable to load content</p>
         </div>
       </section>
-    )
+    );
   }
 
   return (
@@ -73,14 +76,18 @@ export default function HeroSection({ heroData, siteSettings }: HeroSectionProps
             >
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4">
                 <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-red-600 bg-clip-text text-transparent">
-                  {heroData.name.split(' ')[0]}
+                  {heroData.name.split(" ")[0]}
                 </span>
                 <br />
-                <span className="text-gray-800 dark:text-gray-200">{heroData.name.split(' ')[1]}</span>
+                <span className="text-gray-800 dark:text-gray-200">
+                  {heroData.name.split(" ")[1]}
+                </span>
               </h1>
               <div className="flex items-center justify-center lg:justify-start space-x-2 text-gray-600 dark:text-gray-400">
                 <Music className="h-5 w-5" />
-                <span className="text-lg font-medium">{heroData.tagline} • {heroData.location}</span>
+                <span className="text-lg font-medium">
+                  {heroData.tagline} • {heroData.location}
+                </span>
               </div>
             </motion.div>
 
@@ -105,15 +112,28 @@ export default function HeroSection({ heroData, siteSettings }: HeroSectionProps
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 {heroData.ctaButtons?.length ? (
                   heroData.ctaButtons.map((button, index) => (
-                    <Button 
+                    <Button
                       key={index}
-                      asChild 
-                      size="lg" 
-                      variant={button.style === 'primary' ? 'default' : 'outline'}
-                      className={button.style === 'primary' ? 'bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700' : ''}
+                      asChild
+                      size="lg"
+                      variant={
+                        button.style === "primary" ? "default" : "outline"
+                      }
+                      className={
+                        button.style === "primary"
+                          ? "bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+                          : ""
+                      }
                     >
-                      <Link href={button.url} className="flex items-center space-x-2">
-                        {button.url.includes('video') ? <Play className="h-5 w-5" /> : <Calendar className="h-5 w-5" />}
+                      <Link
+                        href={button.url}
+                        className="flex items-center space-x-2"
+                      >
+                        {button.url.includes("video") ? (
+                          <Play className="h-5 w-5" />
+                        ) : (
+                          <Calendar className="h-5 w-5" />
+                        )}
                         <span>{button.text}</span>
                       </Link>
                     </Button>
@@ -121,15 +141,25 @@ export default function HeroSection({ heroData, siteSettings }: HeroSectionProps
                 ) : (
                   // Default buttons if none configured
                   <>
-                    <Button asChild size="lg" className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700">
-                      <Link href="/videos" className="flex items-center space-x-2">
+                    <Button
+                      asChild
+                      size="lg"
+                      className="bg-gradient-to-r from-amber-600 to-orange-600 hover:from-amber-700 hover:to-orange-700"
+                    >
+                      <Link
+                        href="/videos"
+                        className="flex items-center space-x-2"
+                      >
                         <Play className="h-5 w-5" />
                         <span>Watch Performances</span>
                       </Link>
                     </Button>
-                    
+
                     <Button asChild variant="outline" size="lg">
-                      <Link href="/performances" className="flex items-center space-x-2">
+                      <Link
+                        href="/performances"
+                        className="flex items-center space-x-2"
+                      >
                         <Calendar className="h-5 w-5" />
                         <span>Upcoming Shows</span>
                       </Link>
@@ -141,9 +171,9 @@ export default function HeroSection({ heroData, siteSettings }: HeroSectionProps
               {/* Donation link */}
               {siteSettings?.donationLink && (
                 <div className="text-center lg:text-left">
-                  <a 
-                    href={siteSettings.donationLink} 
-                    target="_blank" 
+                  <a
+                    href={siteSettings.donationLink}
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center space-x-2 text-sm text-green-600 hover:text-green-700 font-medium transition-colors"
                   >
@@ -206,5 +236,5 @@ export default function HeroSection({ heroData, siteSettings }: HeroSectionProps
         )}
       </div>
     </section>
-  )
+  );
 }

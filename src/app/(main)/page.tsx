@@ -21,6 +21,7 @@ export default async function Home() {
       client.fetch(SITE_SETTINGS_PAGE_QUERY)
     ])
 
+
     if (!homepage) {
       return (
         <div className="min-h-screen flex items-center justify-center">
@@ -38,7 +39,7 @@ export default async function Home() {
         
         <FeaturedVideos 
           videos={homepage.featuredVideos || []} 
-          youtubeChannelUrl={siteSettings?.youtubeChannelUrl}
+          youtubeChannelUrl={siteSettings?.socialLinks?.youtube}
         />
         
         <FeaturedRecordings 
@@ -47,7 +48,7 @@ export default async function Home() {
         
         <TestimonialsSection 
           testimonials={homepage.testimonials || []}
-          mediaLinks={[]}
+          mediaFeatures={homepage.mediaFeatures || []}
         />
         
         <UpcomingShows 

@@ -170,6 +170,14 @@ export const HOMEPAGE_QUERY = `*[_type == "homepage"][0] {
     description,
     ticketLink,
     isFeatured
+  },
+  "mediaFeatures": *[_type == "mediaFeature" && isFeatured == true] | order(order asc, publicationDate desc) [0...6] {
+    _id,
+    title,
+    description,
+    url,
+    publicationDate,
+    category
   }
 }`
 
@@ -211,7 +219,7 @@ export const SITE_SETTINGS_PAGE_QUERY = `*[_type == "siteSettings"][0] {
     url
   },
   maintenanceMode,
-  youtubeChannelUrl
+  socialLinks
 }`
 
 export const FEATURED_CONTENT_QUERY = `{

@@ -9,6 +9,7 @@ export const client = createClient({
   dataset,
   apiVersion,
   useCdn: false,
+  perspective: 'published',
 })
 
 export const previewClient = createClient({

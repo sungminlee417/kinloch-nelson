@@ -148,6 +148,14 @@ export default defineType({
               rows: 2,
             }),
             defineField({
+              name: 'coverImage',
+              title: 'Cover Image',
+              type: 'image',
+              options: {
+                hotspot: true,
+              },
+            }),
+            defineField({
               name: 'spotifyLink',
               title: 'Spotify Link',
               type: 'url',
