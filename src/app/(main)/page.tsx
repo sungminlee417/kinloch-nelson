@@ -15,6 +15,9 @@ import {
   PERFORMANCES_QUERY
 } from '../../../sanity/lib/queries'
 
+// ISR: Revalidate every minute
+export const revalidate = 60
+
 // Sanity data interfaces
 interface SanityVideo {
   isFeatured: boolean
