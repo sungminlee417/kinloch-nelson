@@ -283,3 +283,25 @@ export const PRESS_DATA_QUERY = `{
     order
   }
 }`
+
+export const PERFORMANCES_PAGE_QUERY = `*[_type == "performancesPage"][0] {
+  _id,
+  pageHeader {
+    title,
+    subtitle
+  },
+  performances[] {
+    title,
+    date,
+    venue,
+    location,
+    description,
+    ticketLink,
+    isFeatured
+  },
+  bookingInfo {
+    showBookingSection,
+    bookingText,
+    bookingEmail
+  }
+}`
