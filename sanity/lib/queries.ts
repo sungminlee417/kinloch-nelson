@@ -305,3 +305,4 @@ export const PERFORMANCES_PAGE_QUERY = `*[_type == "performancesPage"][0] {
     bookingEmail
   }
 }`
+

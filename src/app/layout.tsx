@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -36,15 +36,13 @@ export default function RootLayout({
                 try {
                   var savedTheme = localStorage.getItem('theme');
                   var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                  var theme = savedTheme || systemTheme;
+                  var theme = savedTheme || 'system';
                   
-                  if (theme === 'system') {
-                    theme = systemTheme;
-                  }
+                  var effectiveTheme = theme === 'system' ? systemTheme : theme;
                   
                   document.documentElement.classList.remove('light', 'dark');
-                  document.documentElement.classList.add(theme);
-                  document.documentElement.setAttribute('data-theme', theme);
+                  document.documentElement.classList.add(effectiveTheme);
+                  document.documentElement.setAttribute('data-theme', effectiveTheme);
                 } catch (e) {
                   // Fallback to light theme
                   document.documentElement.classList.add('light');

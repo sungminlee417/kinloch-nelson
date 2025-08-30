@@ -37,8 +37,8 @@ export default defineType({
     }),
 
     defineField({
-      name: 'recordings',
-      title: 'Recordings',
+      name: 'albums',
+      title: 'Albums & Recordings',
       type: 'array',
       of: [
         {
@@ -46,88 +46,125 @@ export default defineType({
           fields: [
             defineField({
               name: 'title',
-              title: 'Recording Title',
+              title: 'Album Title',
               type: 'string',
               validation: Rule => Rule.required(),
             }),
             defineField({
-              name: 'artist',
-              title: 'Artist/Composer',
+              name: 'subtitle',
+              title: 'Subtitle',
+              type: 'string',
+              description: 'e.g., "Recordings 1968-1970"',
+            }),
+            defineField({
+              name: 'releaseYear',
+              title: 'Release Year',
               type: 'string',
             }),
             defineField({
               name: 'description',
-              title: 'Description',
+              title: 'Album Description',
               type: 'text',
-              rows: 3,
-            }),
-            defineField({
-              name: 'audioFile',
-              title: 'Audio File',
-              type: 'file',
-              options: {
-                accept: 'audio/*',
-              },
+              rows: 4,
             }),
             defineField({
               name: 'coverImage',
-              title: 'Cover Image',
+              title: 'Album Cover',
               type: 'image',
               options: {
                 hotspot: true,
               },
             }),
             defineField({
-              name: 'genre',
-              title: 'Genre',
-              type: 'string',
-              options: {
-                list: [
-                  { title: 'Classical', value: 'classical' },
-                  { title: 'Jazz', value: 'jazz' },
-                  { title: 'Folk', value: 'folk' },
-                  { title: 'Original', value: 'original' },
-                  { title: 'Arrangement', value: 'arrangement' },
-                ],
-              },
-            }),
-            defineField({
-              name: 'duration',
-              title: 'Duration',
-              type: 'string',
-              description: 'e.g., 3:45',
-            }),
-            defineField({
-              name: 'recordedAt',
-              title: 'Recording Date',
-              type: 'date',
-            }),
-            defineField({
-              name: 'studio',
-              title: 'Studio Location',
-              type: 'string',
-            }),
-            defineField({
-              name: 'credits',
-              title: 'Credits',
+              name: 'tracks',
+              title: 'Track Listing',
               type: 'array',
               of: [
                 {
                   type: 'object',
                   fields: [
                     defineField({
-                      name: 'name',
-                      title: 'Name',
-                      type: 'string',
+                      name: 'trackNumber',
+                      title: 'Track Number',
+                      type: 'number',
                     }),
                     defineField({
-                      name: 'role',
-                      title: 'Role',
+                      name: 'title',
+                      title: 'Track Title',
                       type: 'string',
-                      description: 'e.g., Producer, Engineer, Mastered by',
+                      validation: Rule => Rule.required(),
+                    }),
+                    defineField({
+                      name: 'duration',
+                      title: 'Duration',
+                      type: 'string',
+                      description: 'e.g., 3:45',
+                    }),
+                    defineField({
+                      name: 'mp3Sample',
+                      title: 'MP3 Sample',
+                      type: 'file',
+                      options: {
+                        accept: 'audio/mp3',
+                      },
                     }),
                   ],
+                  preview: {
+                    select: {
+                      title: 'title',
+                      trackNumber: 'trackNumber',
+                      duration: 'duration',
+                    },
+                    prepare({ title, trackNumber, duration }) {
+                      return {
+                        title: `${trackNumber}. ${title}`,
+                        subtitle: duration,
+                      }
+                    },
+                  },
                 },
+              ],
+            }),
+            defineField({
+              name: 'pricing',
+              title: 'Pricing & Purchase',
+              type: 'object',
+              fields: [
+                defineField({
+                  name: 'price',
+                  title: 'CD Price',
+                  type: 'number',
+                  initialValue: 15.00,
+                }),
+                defineField({
+                  name: 'shipping',
+                  title: 'Shipping Cost',
+                  type: 'number',
+                  initialValue: 3.50,
+                }),
+                defineField({
+                  name: 'paypalButtonId',
+                  title: 'PayPal Button ID',
+                  type: 'string',
+                  description: 'PayPal buy now button ID',
+                }),
+                defineField({
+                  name: 'availableFormats',
+                  title: 'Available Formats',
+                  type: 'array',
+                  of: [
+                    {
+                      type: 'string',
+                      options: {
+                        list: [
+                          { title: 'CD', value: 'cd' },
+                          { title: 'Digital Download', value: 'digital' },
+                          { title: 'Vinyl', value: 'vinyl' },
+                        ],
+                      },
+                    },
+                  ],
+                }),
               ],
             }),
             defineField({
@@ -148,6 +185,7 @@ export default defineType({
                           { title: 'Apple Music', value: 'apple' },
                           { title: 'Bandcamp', value: 'bandcamp' },
                           { title: 'SoundCloud', value: 'soundcloud' },
+                          { title: 'Tompkins Square', value: 'tompkinssquare' },
                         ],
                       },
                     }),
@@ -161,6 +199,49 @@ export default defineType({
               ],
             }),
             defineField({
+              name: 'reviews',
+              title: 'Reviews & Quotes',
+              type: 'array',
+              of: [
+                {
+                  type: 'object',
+                  fields: [
+                    defineField({
+                      name: 'quote',
+                      title: 'Review Quote',
+                      type: 'text',
+                      rows: 2,
+                    }),
+                    defineField({
+                      name: 'source',
+                      title: 'Source',
+                      type: 'string',
+                      description: 'e.g., Mojo Magazine',
+                    }),
+                  ],
+                },
+              ],
+            }),
+            defineField({
+              name: 'type',
+              title: 'Album Type',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Studio Album', value: 'studio' },
+                  { title: 'Live Recording', value: 'live' },
+                  { title: 'Compilation', value: 'compilation' },
+                  { title: 'Book', value: 'book' },
+                ],
+              },
+            }),
+            defineField({
+              name: 'isFeatured',
+              title: 'Featured Album',
+              type: 'boolean',
+              initialValue: false,
+            }),
+            defineField({
               name: 'order',
               title: 'Display Order',
               type: 'number',
@@ -170,17 +251,137 @@ export default defineType({
           preview: {
             select: {
               title: 'title',
-              artist: 'artist',
-              genre: 'genre',
+              subtitle: 'subtitle',
+              releaseYear: 'releaseYear',
+              type: 'type',
             },
-            prepare({ title, artist, genre }) {
+            prepare({ title, subtitle, releaseYear, type }) {
               return {
-                title,
-                subtitle: `${artist || 'Kinloch Nelson'} - ${genre || 'Recording'}`,
+                title: `${title}${subtitle ? `: ${subtitle}` : ''}`,
+                subtitle: `${releaseYear || 'Unknown Year'} - ${type || 'Album'}`,
               }
             },
           },
         },
+      ],
+    }),
+
+    defineField({
+      name: 'additionalInfo',
+      title: 'Additional Information Sections',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'showAdditionalInfo',
+          title: 'Show Additional Information Section',
+          type: 'boolean',
+          initialValue: true,
+        }),
+        defineField({
+          name: 'section1',
+          title: 'Section 1',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Section Title',
+              type: 'string',
+              initialValue: 'Musical Journey',
+            }),
+            defineField({
+              name: 'content',
+              title: 'Section Content',
+              type: 'text',
+              rows: 4,
+              initialValue: 'These recordings showcase the evolution of Kinloch Nelson\'s fingerstyle technique, spanning decades of musical development. From early archival recordings to contemporary releases, each album represents a chapter in an ongoing musical journey.',
+            }),
+          ],
+        }),
+        defineField({
+          name: 'section2',
+          title: 'Section 2',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'title',
+              title: 'Section Title',
+              type: 'string',
+              initialValue: 'Purchase Information',
+            }),
+            defineField({
+              name: 'content',
+              title: 'Section Content',
+              type: 'text',
+              rows: 4,
+              initialValue: 'CDs are available for $15.00 plus $3.50 shipping via PayPal. All recordings feature high-quality mastering optimized for both critical listening and casual enjoyment. Digital downloads may be available for select releases.',
+            }),
+          ],
+        }),
+      ],
+    }),
+
+    defineField({
+      name: 'callToAction',
+      title: 'Call to Action Section',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'showCallToAction',
+          title: 'Show Call to Action Section',
+          type: 'boolean',
+          initialValue: true,
+        }),
+        defineField({
+          name: 'title',
+          title: 'CTA Title',
+          type: 'string',
+          initialValue: 'Experience the Music',
+        }),
+        defineField({
+          name: 'description',
+          title: 'CTA Description',
+          type: 'text',
+          rows: 3,
+          initialValue: 'Listen to sample tracks, stream on your preferred platform, or order physical CDs to experience the full depth and warmth of these fingerstyle guitar recordings.',
+        }),
+        defineField({
+          name: 'primaryButton',
+          title: 'Primary Button',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'text',
+              title: 'Button Text',
+              type: 'string',
+              initialValue: 'Browse Albums',
+            }),
+            defineField({
+              name: 'url',
+              title: 'Button URL',
+              type: 'string',
+              initialValue: '#albums',
+            }),
+          ],
+        }),
+        defineField({
+          name: 'secondaryButton',
+          title: 'Secondary Button',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'text',
+              title: 'Button Text',
+              type: 'string',
+              initialValue: 'Contact for Inquiries',
+            }),
+            defineField({
+              name: 'url',
+              title: 'Button URL',
+              type: 'string',
+              initialValue: '/contact',
+            }),
+          ],
+        }),
       ],
     }),
   ],
@@ -188,12 +389,12 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      recordings: 'recordings',
+      albums: 'albums',
     },
-    prepare({ recordings }) {
+    prepare({ albums }) {
       return {
         title: 'Recordings Page',
-        subtitle: `${recordings?.length || 0} recordings`,
+        subtitle: `${albums?.length || 0} albums`,
       }
     },
   },

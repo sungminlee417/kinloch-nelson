@@ -17,21 +17,43 @@ interface ThemeProviderProps {
   defaultTheme?: Theme;
 }
 
+// Get initial theme that matches server-side script
+function getInitialTheme(): { theme: Theme; resolvedTheme: "light" | "dark" } {
+  if (typeof window === "undefined") {
+    return { theme: "system", resolvedTheme: "light" };
+  }
+
+  const savedTheme = localStorage.getItem("theme") as Theme | null;
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  const initialTheme = savedTheme || "system";
+  
+  let resolvedTheme: "light" | "dark";
+  if (initialTheme === "system") {
+    resolvedTheme = systemTheme;
+  } else {
+    resolvedTheme = initialTheme;
+  }
+
+  return { theme: initialTheme, resolvedTheme };
+}
+
 export function ThemeProvider({ children }: ThemeProviderProps) {
+  const [mounted, setMounted] = useState(false);
   const [theme, setTheme] = useState<Theme>("system");
   const [resolvedTheme, setResolvedTheme] = useState<"light" | "dark">("light");
 
+  // Initialize theme state after component mounts to match server
   useEffect(() => {
-    // Load theme from localStorage on mount
-    const savedTheme = localStorage.getItem("theme") as Theme | null;
-    const initialTheme = savedTheme || "system";
-
+    const { theme: initialTheme, resolvedTheme: initialResolvedTheme } = getInitialTheme();
     setTheme(initialTheme);
+    setResolvedTheme(initialResolvedTheme);
+    setMounted(true);
   }, []);
 
   useEffect(() => {
-    const root = document.documentElement;
+    if (!mounted) return;
 
+    const root = document.documentElement;
     let effectiveTheme: "light" | "dark";
 
     if (theme === "system") {
@@ -42,15 +64,37 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       effectiveTheme = theme;
     }
 
-    // Clear all theme classes and apply new one
-    root.className = root.className.replace(/\b(light|dark)\b/g, "");
-    root.classList.add(effectiveTheme);
-    root.setAttribute("data-theme", effectiveTheme);
-    setResolvedTheme(effectiveTheme);
+    // Only update if different from current resolved theme
+    if (effectiveTheme !== resolvedTheme) {
+      root.classList.remove("light", "dark");
+      root.classList.add(effectiveTheme);
+      root.setAttribute("data-theme", effectiveTheme);
+      setResolvedTheme(effectiveTheme);
+    }
 
     // Save to localStorage
     localStorage.setItem("theme", theme);
-  }, [theme]);
+  }, [theme, mounted, resolvedTheme]);
+
+  // Handle system theme changes
+  useEffect(() => {
+    if (!mounted || theme !== "system") return;
+
+    const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+    const handleChange = () => {
+      const newResolvedTheme = mediaQuery.matches ? "dark" : "light";
+      if (newResolvedTheme !== resolvedTheme) {
+        const root = document.documentElement;
+        root.classList.remove("light", "dark");
+        root.classList.add(newResolvedTheme);
+        root.setAttribute("data-theme", newResolvedTheme);
+        setResolvedTheme(newResolvedTheme);
+      }
+    };
+
+    mediaQuery.addEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener("change", handleChange);
+  }, [theme, mounted, resolvedTheme]);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, resolvedTheme }}>
