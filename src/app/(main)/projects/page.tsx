@@ -1,219 +1,166 @@
 import { Metadata } from 'next'
-import { FolderOpen, Music, Users, Calendar, ExternalLink } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { Wrench, Guitar, Sparkles, Heart } from 'lucide-react'
+import { client } from '../../../../sanity/lib/client'
+
+export const revalidate = 60
 
 export const metadata: Metadata = {
   title: 'Projects | Kinloch Nelson',
-  description: 'Musical projects, collaborations, and special performances by Kinloch Nelson',
+  description: 'Guitar building and modification projects from the Laboratory of the Guitar Mad Scientist',
 }
 
-const projects = [
-  {
-    id: '1',
-    title: 'Partly On Time: Recordings, 1968-1970',
-    description: 'A collection of early recordings showcasing the development of fingerstyle guitar techniques',
-    type: 'Album',
-    year: '1970',
-    status: 'Released',
-    links: [
-      { name: 'Listen on Bandcamp', url: '#' },
-      { name: 'Spotify', url: '#' },
-    ]
+const PROJECTS_QUERY = `*[_type == "projectsPage"][0] {
+  _id,
+  pageHeader {
+    title,
+    subtitle
   },
-  {
-    id: '2',
-    title: 'Dynamic Recording Studios Sessions',
-    description: 'Professional studio recordings capturing the essence of live fingerstyle performances',
-    type: 'Recording Sessions',
-    year: 'Various',
-    status: 'Ongoing',
-    links: [
-      { name: 'Studio Information', url: '/studio' },
-    ]
+  projects[] {
+    title,
+    description,
+    type,
+    status,
+    motto,
+    icon,
+    order
+  } | order(order asc),
+  philosophySection {
+    title,
+    content
   },
-  {
-    id: '3',
-    title: 'YouTube Performance Series',
-    description: 'Comprehensive video collection featuring classical arrangements, jazz standards, and original compositions',
-    type: 'Video Series',
-    year: 'Ongoing',
-    status: 'Active',
-    links: [
-      { name: 'Watch on YouTube', url: 'https://www.youtube.com/@kinlochnelson' },
-      { name: 'View All Videos', url: '/videos' },
-    ]
-  },
-  {
-    id: '4',
-    title: 'Workshop & Masterclass Series',
-    description: 'Educational programs focusing on fingerstyle guitar techniques and musical interpretation',
-    type: 'Educational',
-    year: 'Ongoing',
-    status: 'Available',
-    links: [
-      { name: 'Workshop Details', url: '/workshops' },
-      { name: 'Contact for Booking', url: '/contact' },
-    ]
+  contactSection {
+    title,
+    content,
+    motto
   }
-]
+}`
 
-export default function ProjectsPage() {
-  return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <section className="py-16 bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+const iconMap: { [key: string]: React.ComponentType<{className?: string}> } = {
+  Guitar,
+  Sparkles,
+  Wrench,
+  Heart
+}
+
+export default async function ProjectsPage() {
+  try {
+    const pageData = await client.fetch(PROJECTS_QUERY)
+    
+    if (!pageData) {
+      return (
+        <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
           <div className="text-center">
-            <FolderOpen className="h-16 w-16 mx-auto mb-6 text-purple-100" />
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              Musical Projects
-            </h1>
-            <p className="text-xl text-purple-100 max-w-2xl mx-auto">
-              Recordings, performances, and collaborative works spanning decades of musical artistry
-            </p>
+            <p className="text-gray-600 dark:text-gray-400">Projects content not available</p>
           </div>
         </div>
-      </section>
+      )
+    }
 
-      {/* Projects Grid */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            {projects.map((project) => (
-              <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="p-8">
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
-                        {project.title}
-                      </h3>
-                      <div className="flex items-center space-x-4 text-sm text-gray-600 mb-3">
-                        <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                          {project.type}
-                        </span>
-                        <span>{project.year}</span>
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                          project.status === 'Released' ? 'bg-green-100 text-green-800' :
-                          project.status === 'Ongoing' ? 'bg-blue-100 text-blue-800' :
-                          project.status === 'Active' ? 'bg-amber-100 text-amber-800' :
-                          'bg-gray-100 text-gray-800'
-                        }`}>
-                          {project.status}
-                        </span>
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+        {/* Hero Section */}
+        <section className="py-16 bg-gradient-to-r from-amber-600 to-orange-600 dark:from-amber-700 dark:to-orange-700 text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <Wrench className="h-16 w-16 mx-auto mb-6 text-amber-200" />
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                {pageData.pageHeader?.title || 'Laboratory of the Guitar Mad Scientist'}
+              </h1>
+              <p className="text-xl text-amber-200 max-w-2xl mx-auto">
+                {pageData.pageHeader?.subtitle || 'Guitar building and modification projects exploring innovative techniques and custom solutions'}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Projects Grid */}
+        <section className="py-16">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {pageData.projects?.map((project: {title: string, description: string, type: string, icon: string, status: string, highlights?: string[], motto?: string}, index: number) => {
+                const IconComponent = iconMap[project.icon] || Guitar
+                return (
+                  <div key={index} className="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+                    <div className="p-8">
+                      <div className="flex items-start space-x-4 mb-6">
+                        <div className="flex-shrink-0">
+                          <div className="w-16 h-16 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center">
+                            <IconComponent className="h-8 w-8 text-amber-600 dark:text-amber-400" />
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                            {project.title}
+                          </h3>
+                          <div className="flex items-center space-x-3 text-sm mb-3">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200">
+                              {project.type}
+                            </span>
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200">
+                              {project.status}
+                            </span>
+                          </div>
+                        </div>
                       </div>
+
+                      <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-6">
+                        {project.description}
+                      </p>
+
+                      {project.motto && (
+                        <div className="bg-amber-50 dark:bg-amber-900/20 border-l-4 border-amber-500 p-4 rounded-lg">
+                          <p className="text-amber-800 dark:text-amber-300 italic font-medium">
+                            "{project.motto}"
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
-
-                  <p className="text-gray-600 mb-6">
-                    {project.description}
-                  </p>
-
-                  <div className="space-y-2">
-                    {project.links.map((link, index) => (
-                      <Button 
-                        key={index}
-                        variant={index === 0 ? "default" : "outline"} 
-                        size="sm" 
-                        className="w-full justify-start"
-                        asChild
-                      >
-                        <a 
-                          href={link.url}
-                          target={link.url.startsWith('http') ? '_blank' : undefined}
-                          rel={link.url.startsWith('http') ? 'noopener noreferrer' : undefined}
-                          className="flex items-center space-x-2"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                          <span>{link.name}</span>
-                        </a>
-                      </Button>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
+                )
+              })}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Featured Media */}
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">
-              Featured Media
+        {/* Philosophy Section */}
+        <section className="py-16 bg-white dark:bg-gray-800">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="mb-8">
+              <Heart className="h-12 w-12 text-amber-600 dark:text-amber-400 mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                {pageData.philosophySection?.title || 'The Mad Scientist Approach'}
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                {pageData.philosophySection?.content || 'These projects represent a hands-on exploration of guitar craftsmanship and performance enhancement. Each experiment is driven by curiosity, creativity, and a passion for discovering new possibilities in acoustic guitar playing and construction.'}
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Contact Section */}
+        <section className="py-16 bg-gradient-to-r from-amber-600 to-orange-600 dark:from-amber-700 dark:to-orange-700 text-white">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl font-bold mb-4">
+              {pageData.contactSection?.title || 'Explore Your Own Projects'}
             </h2>
-            <p className="text-xl text-gray-600">
-              Highlights from various projects and collaborations
+            <p className="text-xl text-amber-100 mb-8">
+              {pageData.contactSection?.content || 'Inspired to try your own guitar modifications or building projects? Contact Kinloch Nelson for guidance, workshops, or collaborative experimentation.'}
+            </p>
+            <p className="text-amber-200 italic text-lg">
+              {pageData.contactSection?.motto || 'Remember: "Do try this at home... Have fun. Twang!"'}
             </p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <Music className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Fretboard Journal Podcast
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Featured interview and performance on the acclaimed guitar podcast
-              </p>
-              <Button variant="outline" size="sm" asChild>
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                  Listen Now
-                </a>
-              </Button>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <Users className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Acoustic Guitar Magazine Sessions
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Studio session and interview with premier acoustic guitar publication
-              </p>
-              <Button variant="outline" size="sm" asChild>
-                <a href="#" target="_blank" rel="noopener noreferrer">
-                  Watch Session
-                </a>
-              </Button>
-            </div>
-
-            <div className="bg-gray-50 rounded-lg p-6 text-center">
-              <Calendar className="h-12 w-12 text-purple-600 mx-auto mb-4" />
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Live Performance Archive
-              </h3>
-              <p className="text-gray-600 text-sm mb-4">
-                Collection of live performances from venues across the Northeast
-              </p>
-              <Button variant="outline" size="sm" asChild>
-                <a href="/performances">
-                  View Archive
-                </a>
-              </Button>
-            </div>
-          </div>
+        </section>
+      </div>
+    )
+  } catch (error) {
+    console.error('Error fetching projects data:', error)
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-gray-600 dark:text-gray-400">Unable to load projects</p>
         </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-16 bg-gray-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">
-            Interested in Collaboration?
-          </h2>
-          <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-            Contact Kinloch Nelson to discuss musical projects, recording sessions, or performance opportunities
-          </p>
-          <Button asChild size="lg" className="bg-purple-600 hover:bg-purple-700">
-            <a href="/contact" className="flex items-center space-x-2">
-              <ExternalLink className="h-5 w-5" />
-              <span>Start a Project</span>
-            </a>
-          </Button>
-        </div>
-      </section>
-    </div>
-  )
+      </div>
+    )
+  }
 }

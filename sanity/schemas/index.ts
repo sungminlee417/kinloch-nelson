@@ -10,6 +10,8 @@ import recordingStudioPage from './pages/recordingStudioPage'
 import stanleyWatsonPage from './pages/stanleyWatsonPage'
 import linksPage from './pages/linksPage'
 import pressPage from './pages/pressPage'
+import photosPage from './pages/photosPage'
+import workshopsPage from './pages/workshopsPage'
 import siteSettings from './pages/siteSettings'
 
 // Content schemas
@@ -28,6 +30,8 @@ export const schemaTypes = [
   stanleyWatsonPage,
   linksPage,
   pressPage,
+  photosPage,
+  workshopsPage,
   siteSettings,
   
   // Content schemas

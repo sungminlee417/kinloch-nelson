@@ -24,14 +24,14 @@ export default defineType({
           name: 'title',
           title: 'Header Title',
           type: 'string',
-          initialValue: 'Musical Projects',
+          initialValue: 'Laboratory of the Guitar Mad Scientist',
         }),
         defineField({
           name: 'subtitle',
           title: 'Header Subtitle',
           type: 'text',
           rows: 2,
-          initialValue: 'A collection of musical collaborations and creative endeavors',
+          initialValue: 'Guitar building and modification projects exploring innovative techniques and custom solutions',
         }),
       ],
     }),
@@ -53,8 +53,9 @@ export default defineType({
             defineField({
               name: 'description',
               title: 'Description',
-              type: 'array',
-              of: [{ type: 'block' }],
+              type: 'text',
+              rows: 4,
+              validation: Rule => Rule.required(),
             }),
             defineField({
               name: 'featuredImage',
@@ -65,57 +66,56 @@ export default defineType({
               },
             }),
             defineField({
-              name: 'category',
-              title: 'Category',
+              name: 'type',
+              title: 'Project Type',
               type: 'string',
               options: {
                 list: [
-                  { title: 'Collaboration', value: 'collaboration' },
-                  { title: 'Solo Project', value: 'solo' },
-                  { title: 'Recording', value: 'recording' },
-                  { title: 'Educational', value: 'educational' },
+                  { title: 'Guitar Building', value: 'Guitar Building' },
+                  { title: 'Performance Enhancement', value: 'Performance Enhancement' },
+                  { title: 'Technical Innovation', value: 'Technical Innovation' },
+                  { title: 'Research', value: 'Research' },
                 ],
               },
             }),
             defineField({
-              name: 'year',
-              title: 'Year',
+              name: 'status',
+              title: 'Project Status',
               type: 'string',
+              options: {
+                list: [
+                  { title: 'Ongoing', value: 'Ongoing' },
+                  { title: 'Completed', value: 'Completed' },
+                  { title: 'Technique', value: 'Technique' },
+                  { title: 'Research', value: 'Research' },
+                ],
+              },
             }),
             defineField({
-              name: 'links',
-              title: 'Project Links',
-              type: 'array',
-              of: [
-                {
-                  type: 'object',
-                  fields: [
-                    defineField({
-                      name: 'title',
-                      title: 'Link Title',
-                      type: 'string',
-                    }),
-                    defineField({
-                      name: 'url',
-                      title: 'URL',
-                      type: 'url',
-                    }),
-                    defineField({
-                      name: 'type',
-                      title: 'Link Type',
-                      type: 'string',
-                      options: {
-                        list: [
-                          { title: 'Website', value: 'website' },
-                          { title: 'Spotify', value: 'spotify' },
-                          { title: 'YouTube', value: 'youtube' },
-                          { title: 'Bandcamp', value: 'bandcamp' },
-                        ],
-                      },
-                    }),
-                  ],
-                },
-              ],
+              name: 'motto',
+              title: 'Project Motto/Quote',
+              type: 'string',
+              description: 'Inspirational quote or motto for this project',
+            }),
+            defineField({
+              name: 'icon',
+              title: 'Icon Type',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Guitar', value: 'Guitar' },
+                  { title: 'Sparkles', value: 'Sparkles' },
+                  { title: 'Wrench', value: 'Wrench' },
+                  { title: 'Hammer', value: 'Hammer' },
+                ],
+              },
+              initialValue: 'Guitar',
+            }),
+            defineField({
+              name: 'order',
+              title: 'Display Order',
+              type: 'number',
+              validation: Rule => Rule.integer().positive(),
             }),
             defineField({
               name: 'isFeatured',
@@ -127,18 +127,65 @@ export default defineType({
           preview: {
             select: {
               title: 'title',
-              category: 'category',
-              year: 'year',
-              featured: 'isFeatured',
+              type: 'type',
+              status: 'status',
             },
-            prepare({ title, category, year, featured }) {
+            prepare({ title, type, status }) {
               return {
-                title: `${featured ? '⭐ ' : ''}${title}`,
-                subtitle: `${category} - ${year}`,
+                title,
+                subtitle: `${type} - ${status}`,
               }
             },
           },
         },
+      ],
+    }),
+
+    defineField({
+      name: 'philosophySection',
+      title: 'Philosophy Section',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Section Title',
+          type: 'string',
+          initialValue: 'The Mad Scientist Approach',
+        }),
+        defineField({
+          name: 'content',
+          title: 'Philosophy Content',
+          type: 'text',
+          rows: 4,
+          initialValue: 'These projects represent a hands-on exploration of guitar craftsmanship and performance enhancement. Each experiment is driven by curiosity, creativity, and a passion for discovering new possibilities in acoustic guitar playing and construction.',
+        }),
+      ],
+    }),
+
+    defineField({
+      name: 'contactSection',
+      title: 'Contact Section',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Section Title',
+          type: 'string',
+          initialValue: 'Explore Your Own Projects',
+        }),
+        defineField({
+          name: 'content',
+          title: 'Section Content',
+          type: 'text',
+          rows: 3,
+          initialValue: 'Inspired to try your own guitar modifications or building projects? Contact Kinloch Nelson for guidance, workshops, or collaborative experimentation.',
+        }),
+        defineField({
+          name: 'motto',
+          title: 'Contact Section Motto',
+          type: 'string',
+          initialValue: 'Remember: "Do try this at home... Have fun. Twang!"',
+        }),
       ],
     }),
   ],

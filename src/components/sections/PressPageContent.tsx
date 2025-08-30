@@ -141,16 +141,16 @@ export default function PressPageContent({ pressData }: PressPageContentProps) {
 
         {/* Media Features */}
         <section className="mb-16">
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Media Features</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Media Features</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {pressData.links.map((link) => (
                 <div key={link._id} className="border border-gray-200 dark:border-gray-600 rounded-lg p-6">
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">{link.title}</h3>
-                  <span className="inline-block px-3 py-1 text-sm bg-amber-100 text-amber-800 rounded-full mb-3">
+                  <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">{link.title}</h3>
+                  <span className="inline-block px-3 py-1 text-sm bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-200 rounded-full mb-3">
                     Press Feature
                   </span>
-                  <p className="text-gray-600 mb-4">{link.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 mb-4">{link.description}</p>
                   <Button variant="outline" size="sm" asChild>
                     <a href={link.url} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="h-4 w-4 mr-2" />
@@ -190,8 +190,8 @@ export default function PressPageContent({ pressData }: PressPageContentProps) {
 
         {/* Photos & Media Assets */}
         <section className="mb-16">
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Photos & Media Assets</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-8">Photos & Media Assets</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="text-center p-6 border border-gray-200 dark:border-gray-600 rounded-lg">
                 <Image className="h-12 w-12 text-gray-400 mx-auto mb-4" aria-hidden="true" />
